@@ -1,8 +1,0 @@
-{% extends "app/mydir/common/maincontent.html" %}
-{% block content %}
-{% if permissions.ho %}
-    {% include "app/mydir/includes/apps/stocktransfer/viewrequests.html" %}
-{% else %}
-    {% include "app/mydir/includes/apps/stocktransfer/stocktransfer.html" %}
-{% endif %}
-{% endblock %}
