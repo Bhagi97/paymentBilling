@@ -1,0 +1,67 @@
+<div class="actionBar">
+    <a href="javascript:{}" onclick="document.getElementById('addform').submit();" id="finish" class="buttonFinish buttonDisabled btn btn-default">Finish</a>
+    <a href="#" id="next" class="buttonNext btn btn-success" onclick="loadNext()">Next</a>
+    <a href="#" id="prev" class="buttonPrevious buttonDisabled btn btn-primary" onclick="loadPrev()">Previous</a>
+</div>
+
+<script>
+    function loadNext() {
+
+      for (i=1;i<=3;i++)
+      if(document.getElementById('step-'.concat(i.toString())).style.display=='block')
+      {
+         document.getElementById('step-'.concat((i).toString())).style.display='none';
+         document.getElementById('step-'.concat((i+1).toString())).style.display='block';
+
+         document.getElementById('button'.concat((i).toString())).className+=" done";
+         document.getElementById('button'.concat((i).toString())).className=document.getElementById('button'.concat((i).toString())).className.replace( /(?:^|\s)selected(?!\S)/g , '' );
+
+         document.getElementById('button'.concat((i+1).toString())).className=document.getElementById('button'.concat((i+1).toString())).className.replace( /(?:^|\s)disabled(?!\S)/g , '' );
+         document.getElementById('button'.concat((i+1).toString())).className+=" selected";
+
+         if (i==1)
+         {
+            document.getElementById("prev").className =
+            document.getElementById("prev").className.replace
+            ( /(?:^|\s)buttonDisabled(?!\S)/g , '' );
+         }
+         if (i==2)
+         {
+            document.getElementById("next").className += " buttonDisabled";
+            document.getElementById("finish").className=document.getElementById("finish").className.replace( /(?:^|\s)buttonDisabled(?!\S)/g , '' );
+         }
+
+         break;
+      }
+    }
+
+    function loadPrev() {
+
+      for (i=1;i<=4;i++)
+      if(document.getElementById('step-'.concat(i.toString())).style.display=='block')
+      {
+         document.getElementById('step-'.concat((i).toString())).style.display='none';
+         document.getElementById('step-'.concat((i-1).toString())).style.display='block';
+
+         document.getElementById('button'.concat((i).toString())).className+=" disabled";
+         document.getElementById('button'.concat((i).toString())).className=document.getElementById('button'.concat((i).toString())).className.replace( /(?:^|\s)selected(?!\S)/g , '' );
+
+         document.getElementById('button'.concat((i-1).toString())).className=document.getElementById('button'.concat((i-1).toString())).className.replace( /(?:^|\s)done(?!\S)/g , '' );
+         document.getElementById('button'.concat((i-1).toString())).className+=" selected";
+
+         if (i==2)
+         {
+            document.getElementById("prev").className += " buttonDisabled";
+
+         }
+         if (i==3)
+         {
+            document.getElementById("finish").className += " buttonDisabled";
+            document.getElementById("next").className=document.getElementById("prev").className.replace( /(?:^|\s)buttonDisabled(?!\S)/g , '' );
+         }
+
+         break;
+      }
+    }
+
+</script>

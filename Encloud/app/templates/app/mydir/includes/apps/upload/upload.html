@@ -1,0 +1,198 @@
+<div class="row">
+<div class="page-title">
+                            <div class="title_left">
+                                  <h3 style="margin-left:20px;">Medical Reports</h3>
+                            </div>
+</div>
+</div>
+
+<div class="row">
+
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><small>View patient files</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+
+                      <div class="row" style="margin-bottom:20px;">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" style="margin-top:7px;" for="patient">Patient </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select id="patientid" name="patientid" class="form-control">
+                                  {% for p in patients %}
+                                    <option value="{{ p.customer_code }}">{{ p.name }} ({{ p.customer_code }})</option>
+                                  {% endfor %}
+                                </select>
+                                <script>
+                                  document.getElementById("patientid").selectedIndex = -1;
+                                </script>
+                            </div>
+                      </div>
+                      <div class="row" id="fill"></div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                            <div class="col-md-6 col-md-offset-3">
+                              <button id="proceed" class="btn btn-success">Proceed to Prescribe</button>
+                            </div>
+                      </div>
+
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><small>Upload files to specific patients</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+
+                      <form method="post" enctype="multipart/form-data" action="upload.html" class="form-horizontal form-label-left" novalidate> {% csrf_token %}
+
+                      <div class="form-group" >
+                            <label class="control-label col-md-5 col-sm-3 col-xs-12" for="patient">Patient </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select id="patient" name="patient" class="form-control">
+                              {% for p in patients %}
+                                <option value="{{ p.customer_code }}">{{ p.name }} ({{ p.customer_code }})</option>
+                              {% endfor %}
+                            </select>
+                            <script>
+                              document.getElementById("patient").selectedIndex = -1;
+                            </script>
+                            </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="name" class="control-label col-md-5">Type of Medical Report</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select id="name" name="name" class="form-control">
+                                <option value="Scan">Scan</option>
+                                <option value="X-Ray">X-Ray</option>
+                                <option value="Lab Report">Lab Report</option>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="scan" class="control-label col-md-5">File</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="file" name="scan" id="scan" required="required">
+                        </div>
+                      </div>
+
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                          <button type="submit" class="btn btn-primary">Cancel</button>
+                          <button id="send" type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                      </div>
+                    </form>
+
+
+                  </div>
+                </div>
+              </div>
+
+</div>
+
+
+<script>
+$(document).on('change','#patientid',function(){
+      metalist = [];
+      metalist.push(document.getElementById("patientid").value);
+      $.ajax({
+        url: '/ajax/getscans/',
+        data: {
+          'metalist': metalist,
+        },
+        dataType: 'json',
+        success: function (data) {
+            var b = "";
+            var b = '<table class="table table-striped"> \
+                <thead> \
+                  <tr> \
+                    <th> Name</th> \
+                    <th> Date</th> \
+                    <th> Delete</th> \
+                  </tr> \
+                </thead> \
+                <tbody id="billbody">';
+
+            for (var j = 0; j < data.items.length; j++) {
+                       var s = '<tr> \
+                          <th><a href=/'+data.items[j].image+' target="_blank">'+data.items[j].name+'</td> \
+                          <td>'+data.items[j].timestamp+'</td> \
+                          <td onclick="del('+data.items[j].id+')"><a href="#"><i class="fa fa-lg fa-times" aria-hidden="true"></i></a></td> \
+                        </tr>';
+                        b = b+s;
+                }
+            b+='</tbody> </table>';
+            document.getElementById("fill").innerHTML = b;
+        }
+      });
+});
+
+function del(id){
+        $.ajax({
+            url: "ajax/delscan/",
+            data: { 'id': id },
+            success: function(response){
+                    location.reload();
+            },
+            error: function(){
+                  alert("Error");
+            }
+        });
+}
+
+$(document).ready(function(){
+
+      function getSearchParameters() {
+          var prmstr = window.location.search.substr(1);
+          return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+      }
+
+      function transformToAssocArray( prmstr ) {
+          var params = {};
+          var prmarr = prmstr.split("&");
+          for ( var i = 0; i < prmarr.length; i++) {
+              var tmparr = prmarr[i].split("=");
+              tmparr[1] = tmparr[1].replace(/%20/g, " ");
+              params[tmparr[0]] = tmparr[1];
+          }
+          return params;
+      }
+
+      var params = getSearchParameters();
+      $('#patientid').val(params['q']);
+
+      $('#proceed').click(
+       function() {
+            window.location = "prescription_new.html?q="+$('#patientid').val()
+        }
+      );
+
+
+
+  });
+</script>
+
+{% include 'app/mydir/common/successfulinsertion.html' %}
+{% include 'app/mydir/common/failure.html' %}

@@ -1,0 +1,197 @@
+<div class="page-title">
+                            <div class="title_left">
+                                  <h3 style="margin-left:20px;">Prescription History</h3>
+                            </div>
+                             <div class="title_right">
+                                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                                    <form action="prescriptionreport.html" method="get">
+                                    <div class="input-group">
+                                        <input class="form-control" name="q" id="q" placeholder="Search for..." type="text">
+                                        <span class="input-group-btn">
+                                           <button class="btn btn-default" type="submit">Go!</button>
+                                        </span>
+
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+</div>
+
+    <div class="clearfix"></div>
+
+{% if patient %}
+<div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Patient details </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <form id="patientdetails" data-parsley-validate class="form-horizontal form-label-left"> {% csrf_token %}
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="name" name="name" required="required" value="{{patient.name}}" class="form-control col-md-7 col-xs-12" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phoneno">Age <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="age" name="age" value="{{patient.age}}"  required="required" class="form-control col-md-7 col-xs-12" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phoneno">Email ID<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="email" name="email" value="{{patient.emailid}}"  required="required" class="form-control col-md-7 col-xs-12" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phoneno">Phone No. <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="phoneno" name="phoneno" value="{{patient.phoneno}}"  required="required" class="form-control col-md-7 col-xs-12" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phoneno">Address<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="address" name="address" value="{{patient.address}}"  required="required" class="form-control col-md-7 col-xs-12" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phoneno">Date Range
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                            <span id="mydaterange">February 3, 2018 - March 4, 2018</span> <b class="caret"></b>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="actionBar">
+                          <a href="javascript:{}" onclick="filter()" class="buttonFinish btn btn-default">Filter</a>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+</div>
+
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2> Prescription Details </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <!-- start accordion -->
+                    <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                      {% for value in history %}
+                      <div class="panel">
+                        <a class="panel-heading collapsed" role="tab" id="heading{{ value.lc }}" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ value.lc }}" aria-expanded="false" aria-controls="collapse{{ value.lc }}">
+                          <h4 class="panel-title">{{ value.datetime }}</h4>
+                        </a>
+                        <div id="collapse{{ value.lc }}" class="panel-collapse collapse" role="tabpanel" aria-expanded="false" aria-labelledby="heading{{ value.lc }}">
+
+                          <div class="panel-body">
+
+
+                            <table class="table table-bordered" style="margin-top:10px;">
+                              <thead>
+                                <tr>
+                                  <th>Type</th>
+                                  <th>Name</th>
+                                  <th>Quantity</th>
+                                  <th>Prescription</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for key1, value1 in value.prescription.iteritems %}
+                                <tr>
+                                  {% for var in value1 %}
+                                  <td>{{ var }}</td>
+                                  {% endfor %}
+                                </tr>
+                              {% endfor %}
+                              {% for key1, value1 in value.treatment.iteritems %}
+                                <tr>
+                                  {% for var in value1 %}
+                                  <td>{{ var }}</td>
+                                  {% endfor %}
+                                </tr>
+                              {% endfor %}
+                              </tbody>
+                            </table>
+                          </div>
+
+                        </div>
+                      </div>
+                    {% endfor %}
+                    </div>
+                    <!-- end of accordion -->
+
+
+                  </div>
+                </div>
+              </div>
+
+
+{% endif %}
+
+<script>
+  function filter(){
+      var range = $('#reportrange').data('daterangepicker').startDate.format("YYYY/MM/DD") + '-' + $('#reportrange').data('daterangepicker').endDate.format("YYYY/MM/DD");
+      window.location = "/prescriptionreport.html?q={{patient.customer_code}}&range="+range
+  }
+
+  $(document).ready(function(){
+
+      function getSearchParameters() {
+          var prmstr = window.location.search.substr(1);
+          return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+      }
+
+      function transformToAssocArray( prmstr ) {
+          var params = {};
+          var prmarr = prmstr.split("&");
+          for ( var i = 0; i < prmarr.length; i++) {
+              var tmparr = prmarr[i].split("=");
+              tmparr[1] = tmparr[1].replace(/%20/g, " ");
+              params[tmparr[0]] = tmparr[1];
+          }
+          return params;
+      }
+
+      var params = getSearchParameters();
+      if (params['range'])
+      {
+          var range = params["range"].split("-");
+          //Pre load Calendar
+      }
+      setTimeout(function(){if($('#reportrange').data('daterangepicker')!==undefined) $('#reportrange').data('daterangepicker').dateLimit = {days:720}; }, 1000);
+
+  });
+
+
+</script>

@@ -1,0 +1,225 @@
+<div class="col-md-3 left_col">
+    <div class="left_col scroll-view" style="width:100%;">
+
+            <div class="clearfix"></div>
+
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_info">
+                <span>Welcome,</span>
+                <h2>{{ user.get_username }}</h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu" >
+              <div class="menu_section">
+                <h3>General</h3>
+                <ul class="nav side-menu">
+
+                  <li><a href="quicknav.html"><i class="fa fa-dashboard"></i> Dashboard <span class="fa fa-chevron-down"></span></a>
+
+                  </li>
+                  {% if permissions.viewdoctor or permissions.change_franchise or permissions.adduser %}
+                  <li><a><i class="fa fa-laptop"></i> Franchisees <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      {% if permissions.add_franchise %}
+                      <li><a href="addfranchise.html">Add Franchisee</a></li>
+                      {% endif %}
+                      {% if permissions.change_franchise %}
+                      <li><a href="viewfranchise.html">View Franchisee</a></li>
+                      {% endif %}
+                      {% if permissions.adduser %}
+                      <li><a href="adduser.html">Add User</a></li>
+                      {% endif %}
+                      {% if permissions.adduser %}
+                      <li><a href="viewusers.html">View Users</a></li>
+                      {% endif %}
+                      {% if permissions.ho %}
+                      <li><a href="loginhistory.html">Login History</a></li>
+                      {% endif %}
+                    </ul>
+                  </li>
+                  {% endif %}
+
+                  {% if permissions.add_appointment or permissions.change_enquiry or permissions.add_customer or permissions.viewpatient %}
+                  <li><a><i class="fa fa-users" aria-hidden="true"></i>{% if permissions.ho %} Appointments {% else %} Reception {% endif %} <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      {% if permissions.add_appointment %}
+                      <li><a href="reception.html">Appointments</a></li>
+                      {% endif %}
+                      {% if not permissions.ho %}
+                      {% if permissions.change_enquiry %}
+                      <li><a href="enquiry.html">Enquiries</a></li>
+                      {% endif %}
+                      {% endif %}
+                      {% if permissions.add_customer %}
+                      <li><a href="registerpatient.html">Register Patient</a></li>
+                      {% endif %}
+                      {% if permissions.viewpatient %}
+                      <li><a href="medicalreports.html">Medical Reports</a></li>
+                      {% endif %}
+                    </ul>
+                  </li>
+                  {% endif %}
+
+
+
+                  {% if permissions.add_category or permissions.add_skulist or permissions.add_product or permissions.add_stock or permissions.add_stocktransfer %}
+                  <li><a><i class="fa fa-truck"></i> Inventory management <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      {% if permissions.add_category %}
+                      <li><a href="categoryentry.html">Category Entry</a></li>
+                      {% endif %}
+                      {% if permissions.add_product %}
+                      <li><a href="productentry.html">Product Entry</a></li>
+                      {% endif %}
+                      {% if permissions.add_package %}
+                      <li><a href="packageentry.html">Package Entry</a></li>
+                      {% elif permissions.add_servicemask %}
+                      <li><a href="togglepackages.html">My Packages</a></li>
+                      {% endif %}
+                      {% if permissions.add_service %}
+                      <li><a href="serviceentry.html">Service Entry</a></li>
+                      {% elif permissions.add_servicemask %}
+                      <li><a href="toggleservices.html">My Services</a></li>
+                      {% endif %}
+                      {% if permissions.add_treatmentmaster %}
+                      <li><a href="treatmententry.html">Treatment Entry</a></li>
+                      {% elif permissions.add_servicemask %}
+                      <li><a href="mytreatments.html">My Treatments</a></li>
+                      {% endif %}
+                      {% if permissions.add_stock %}
+                      <li><a href="addstock.html">Add Stock</a></li>
+                      {% endif %}
+                      {% if permissions.price_discount or permissions.percentage_discount %}
+                      <li><a href="discountentry.html">Discount Entry</a></li>
+                      {% endif %}
+                    </ul>
+                  </li>
+                  {% endif %}
+
+                  {% if permissions.viewdoctor or permissions.viewpatient or permissions.prescribe %}
+                  <li><a><i class="fa fa-user-md"></i> Doctor Patient Records <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      {% if permissions.viewdoctor %}
+                      <li><a href="doctor_details.html">Doctor Details</a></li>
+                      {% endif %}
+                      {% if permissions.viewpatient %}
+                      <li><a href="viewpatients.html">View Patients</a></li>
+                      {% endif %}
+                      {% if permissions.viewpatient %}
+                      <li><a href="pending_patients.html">Pending Patients</a></li>
+                      {% endif %}
+                      {% if permissions.viewpatient %}
+                      <li><a href="patient_details.html">Patient Details</a></li>
+                      {% endif %}
+                      {% if permissions.change_scan %}
+                      <li><a href="upload.html">Upload Files</a></li>
+                      {% endif %}
+                      {% if permissions.prescribe %}
+                      <li><a href="prescription_new.html">Prescribe</a></li>
+                      <li><a href="prescriptionsmade.html">Edit Medical Reports</a></li>
+                      {% endif %}
+                    </ul>
+                  </li>
+                  {% endif %}
+
+                  {% if permissions.bill or permissions.receipt %}
+                  <li><a><i class="fa fa-inr"></i> Billing <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      {% if permissions.ho %}
+                        <li><a href="newbill.html">Main Office Billing</a></li>
+                      {% else %}
+                        {% if permissions.bill %}
+                          <li><a href="newbill.html">Pharmacy Bill</a></li>
+                        {% endif %}
+                        {% if permissions.bill %}
+                          <li><a href="invoicebill.html">Invoice Bill</a></li>
+                        {% endif %}
+                        {% if permissions.bill %}
+                          <li><a href="pendingprescription.html">Pending Prescriptions</a></li>
+                        {% endif %}
+                        {% if permissions.receipt %}
+                          <li><a href="receipt.html">Receipt</a></li>
+                        {% endif %}
+                      {% endif %}
+                    </ul>
+                  </li>
+                  {% endif %}
+
+                  {% if permissions.vendor %}
+                  <li><a><i class="fa fa-sticky-note" aria-hidden="true"></i>File Franchisee Reports <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="inspection.html">Inspection Report</a></li>
+                      <li><a href="implementation.html">Implementation Report</a></li>
+                    </ul>
+                  {% endif %}
+
+
+                  {% if permissions.add_salesreport or permisssions.prescriptionreport or permissions.ho or permissions.add_stockreport or permissions.add_patientreport or permissions.add_doctorreport or permissions.add_auditreport or permissions.add_baditemreport %}
+                  <li><a><i class="fa fa-table"></i> Reports <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      {% if permissions.add_auditreport %}
+                      <li><a href="report_audit.html">Audit Report</a></li>
+                      {% endif %}
+                      {% if permissions.add_salesreport %}
+                      <li><a href="report_sales.html">Item-wise Sales Report</a></li>
+                      {% endif %}
+                      {% if permissions.receiptreport %}
+                      <li><a href="report_receipt.html">Receipt Report</a></li>
+                      {% endif %}
+                      {% if permissions.add_stockreport %}
+                      <li><a href="report_stock.html">Stock Report</a></li>
+                      {% endif %}
+                      {% if permissions.delete_enquiry %}
+                      <li><a href="enquiry_report.html">Enquiry Report</a></li>
+                      {% endif %}
+
+                      {% if permissions.ho %}
+                      <li><a href="report_inspection.html">Inspection Report</a></li>
+                      <li><a href="report_implementation.html">Implementation Report</a></li>
+                      {% endif %}
+                      {% if permissions.prescriptionreport %}
+                      <li><a href="prescriptionreport.html">Prescription Report</a></li>
+                      {% endif %}
+                    </ul>
+                  </li>
+                  {% endif %}
+
+                  <li><a><i class="fa fa-cogs"></i> Settings <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="resetpassword.html">Reset Password</a></li>
+                      <!--<li><a href="about.html">About EnCloud</a></li>-->
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
+
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+
+    </div>
+</div>

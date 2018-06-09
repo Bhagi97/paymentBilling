@@ -1,0 +1,579 @@
+<div class="page-title col-md-12 col-sm-12 col-xs-12">
+    <div class="title_left">
+          <h3 style="margin-left:20px;">Main Office Billing</h3>
+    </div>
+
+    <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right ">
+            <div class="input-group">
+                <select id="q" class="form-control">
+                  {% for c in itemlist %}
+                    <option value="{{c.id}}">{{c.item_name}}</option>
+                  {% endfor %}
+                </select>
+              <script>
+                document.getElementById("q").selectedIndex = -1;
+              </script>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-7 col-sm-7 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2> Items </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="x_content" style="overflow-y:scroll; height:150px;">
+                    {% for item in itemlist %}
+                    <button class="btn btn-default source idbtn" data-rate="{{item.MRP}}" onclick="addtobill('{{item.item_name}}','{{item.MRP}}',1);">{{item.item_name}}</button>
+                    {% endfor %}
+                  </div>
+                </div>
+
+                <div class="x_panel">
+                      <div class="x_title">
+                        <h2> Bill </h2>
+                        <div class="nav navbar-right">
+                            <select id="franchisee" name="franchisee">
+                                   <option value="" disabled selected>Select Franchisee</option>
+                                    {% for f in flist %}
+                                   <option value="{{f.id}}">{{f.franchise_name}}</option>
+                                   {% endfor %}
+                            </select>
+                            <ul class="panel_toolbox">
+                              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                              <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                            </ul>
+                        </div>
+
+
+                        <div class="clearfix"></div>
+                      </div>
+
+                      <div class="x_content" style="overflow-y:scroll; height:330px;">
+                        <table class="table table-striped">
+                                  <thead>
+                                    <tr>
+                                      <th>#</th>
+                                      <th>Item Name</th>
+                                      <th>Rate</th>
+                                      <th>Quantity</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody id="billbody">
+                                  </tbody>
+                        </table>
+                      </div>
+                </div>
+
+
+
+                <div class="actionBar" style="margin-bottom:20px;">
+                    <a disabled id="totalamt" class="buttonPrevious btn" style="margin-right:50px;">Total : 0</a>
+                    <a href="#" onclick="clearbill()" class="buttonPrevious btn btn-primary" >Clear</a>
+                    <a href="#" class="buttonNext btn btn-success" onclick="printbill(0)">Print Bill</a>
+
+                </div>
+    </div>
+
+    <div class="col-md-5 col-sm-5 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <h2><small>Add/Edit Inventory</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  </li>
+                </ul>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <br />
+                <form id="hobillentry" method="post" action="newbill.html" data-parsley-validate class="form-horizontal form-label-left"> {% csrf_token %}
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id">Item ID
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                      <input type="text" id="id" name="id" placeholder="Leave blank for new item" class="form-control col-md-7 col-xs-12" readonly>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <input type="text" id="name" name="name" class="form-control col-md-7 col-xs-12" required="required">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rate">Rate <span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                      <input id="rate" name="rate" required="required" data-parsley-trigger="change" data-parsley-pattern="(\d+\.\d+)|(\d+)" class="form-control col-md-7 col-xs-12">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tax_cgst">Tax <span class="required">*</span>
+                    </label>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                      <input type="text" id="tax_cgst" name="tax_cgst" required="required" data-parsley-trigger="change" data-parsley-pattern="(\d+\.\d+)|(\d+)"  placeholder="CGST (%)" class="form-control col-md-7 col-xs-12">
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                      <input type="text" id="tax_sgst" name="tax_sgst" required="required" data-parsley-trigger="change" data-parsley-pattern="(\d+\.\d+)|(\d+)"  placeholder="SGST (%)" class="form-control col-md-7 col-xs-12">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="stock">Stock <span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                      <input type="text" id="stock" name="stock" class="form-control col-md-7 col-xs-12" data-parsley-type="digits" data-parsley-trigger="change"  required="required">
+                    </div>
+                  </div>
+
+                  <div class="ln_solid"></div>
+                  <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                      <button class="btn btn-danger" type="reset">Delete</button>
+                      <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+    </div>
+</div>
+
+<!-- Modal to print -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Final Bill</h4>
+      </div>
+      <div class="modal-body" style="height:70vh;">
+        <img style="position:absolute; top:50%; left:50%; max-height:90%;max-width:80%;-webkit-transform: translate(-50%, -50%);display:block;" id="bill_img">
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="buttonNext btn btn-success" onclick="printImg('/media/bill/invoice2.jpg')">Print Bill</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--End of print modal-->
+
+<!-- No stock modal-->
+<div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">The following items are out of stock</h4>
+      </div>
+      <div class="modal-body">
+                <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>Item Name</th>
+                                  <th>Status</th>
+                                </tr>
+                              </thead>
+                              <tbody id="myModal2_body">
+                              </tbody>
+                </table>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="buttonNext btn btn-success" onclick="printBillAnyway()" data-dismiss="modal">Print Bill Anyway</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--End of no stock modal-->
+
+<!-- Modal to ask extra charge -->
+<div id="ecModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Enter extra charge</h4>
+      </div>
+      <div class="modal-body" style="height:30vh;">
+        <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ec">Extra Charge <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="ec" name="ec" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="buttonNext btn btn-success" onclick="applyrate()" data-dismiss="modal">Apply</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--End of extra charge modal-->
+
+<script>
+
+    $(document).on('change','#q',function(){
+      metalist = [];
+      metalist.push(document.getElementById("q").value);
+      $.ajax({
+        url: '/ajax/getHOproducts/',
+        data: {
+          'metalist': metalist,
+        },
+        dataType: 'json',
+        success: function (data) {
+            document.getElementById("id").value = data.product.id;
+            document.getElementById("name").value = data.product.item_name;
+            document.getElementById("rate").value = data.product.MRP;
+            document.getElementById("stock").value = data.product.stock;
+            document.getElementById("tax_cgst").value = data.product.tax_CGST;
+            document.getElementById("tax_sgst").value = data.product.tax_SGST;
+            $('[name=SKU]').val(data.product.SKU);
+        }
+      });
+    });
+
+    function addcount(o){
+      ele = o.parentNode.getElementsByTagName('input')[0];
+      ele.value = parseInt(ele.value)+1;
+      var rate = o.parentNode.parentNode.getElementsByTagName('td')[1].innerHTML;
+      var total = document.getElementById("totalamt");
+      var amt = parseInt(total.innerHTML.split(':')[1]);
+      amt+=parseInt(rate);
+      total.innerHTML = "Total : "+String(amt);
+    }
+
+    function subcount(o){
+      ele = o.parentNode.getElementsByTagName('input')[0];
+      if (ele.value>1)
+        {   ele.value = parseInt(ele.value)-1;
+            var rate = o.parentNode.parentNode.getElementsByTagName('td')[1].innerHTML;
+            var total = document.getElementById("totalamt");
+            var amt = parseInt(total.innerHTML.split(':')[1]);
+            amt-=parseInt(rate);
+            total.innerHTML = "Total : "+String(amt);
+        }
+    }
+
+    function delrow(o){
+      ele = o.parentNode.parentNode;
+      var myNode = document.getElementById("billbody");
+      var children = myNode.children;
+      for (var i = 0; children[i] != ele; i++) {}
+      var rate = children[i].getElementsByTagName('td')[1].innerHTML;
+      var quant = children[i].getElementsByTagName('td')[2].getElementsByTagName('input')[0].value;
+      myNode.removeChild(children[i]);
+      for (; i < children.length; i++) {
+        e = children[i].getElementsByTagName('th')[0];
+        e.innerHTML = parseInt(e.innerHTML)-1;
+      }
+      var total = document.getElementById("totalamt");
+      var amt = parseInt(total.innerHTML.split(':')[1]);
+      amt-=(parseInt(quant)*parseInt(rate));
+      total.innerHTML = "Total : "+String(amt);
+    }
+
+    function clearbill(){
+      var myNode = document.getElementById("billbody");
+      while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+      }
+    }
+
+    function printImg() {
+      url = document.getElementById("bill_img").src;
+      url = url.slice(0,-4);
+      url = url+'.pdf';
+      window.open(url, '_blank', 'fullscreen=yes');
+    }
+
+    function printbill(company_flag){
+
+      productlist = [];
+      quantitylist = [];
+      rlist = [];
+      metalist = [];
+      metalist.push(document.getElementById("franchisee").value);
+      var children = document.getElementById("billbody").children;
+      for (var i = 0; i < children.length; i++) {
+        productlist.push(children[i].getElementsByTagName('td')[0].innerHTML);
+        quantitylist.push(children[i].getElementsByTagName('td')[2].getElementsByTagName('input')[0].value);
+        rlist.push(children[i].getElementsByTagName('td')[1].innerHTML);
+      }
+      $.ajax({
+        url: '/ajax/print_hobill/',
+        data: {
+          'productlist': productlist,
+          'quantitylist': quantitylist,
+          'ratelist': rlist,
+          'metalist': metalist
+        },
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+            document.getElementById("bill_img").src="/media/bill/"+data.filename+".jpg";
+            var body = "";
+            if(data['success']==0)
+            {   for (var j = 0; j < data['status'].length; j++) {
+                    if(data['status'][j]!='Positive')
+                        var s = '<tr> \
+                        <th scope="row">'+String(j+1)+'</th> \
+                        <td>'+productlist[j]+'</td> \
+                        <td>'+data['status'][j]+'</td> \
+                        </tr>';
+                        body = body+s;
+                }
+                document.getElementById('myModal2_body').innerHTML = body;
+                $("#myModal2").modal();
+            }
+            else
+            {
+                $("#myModal").modal();
+            }
+        }
+      });
+    }
+
+    function printBillAnyway(){
+        $("#myModal").modal();
+    }
+
+    function selformat(opt){
+        return '<option value="'+opt+'">'+opt+'</option>';
+    }
+
+
+    function addtobill(product,rate,val){
+
+      var myNode = document.getElementById("billbody");
+      var container = document.createElement("tr");
+      var children = myNode.children;
+      for (var i = 0; i < children.length ; i++) {
+        if (children[i].getElementsByTagName('td')[0].innerHTML == product){
+          p = children[i].getElementsByTagName('td')[2];
+          p.getElementsByTagName('input')[0].value = parseInt(p.getElementsByTagName('input')[0].value)+1;
+          break;
+        }
+      }
+      if (i == children.length){
+        container.id = String(myNode.childElementCount+1);
+        container.innerHTML = '<th scope="row">'+String(myNode.childElementCount+1)+'</th> \
+                                      <td>'+product+'</td> \
+                                      <td>'+rate+'</td> \
+                                      <td> \
+                                        <a href="#" onclick="addcount(this)"> <i class="fa fa-plus" style="margin-right:5px;" aria-hidden="true"></i></a> \
+                                        <a href="#" onclick="subcount(this)"> <i class="fa fa-minus" style="margin-right:5px;" aria-hidden="true"></i></a> \
+                                        <input style="width: 35px;height: 25px;margin-right:5px;" type="text" value="'+val+'" > \
+                                        <a href="#" onclick="delrow(this)"> <i class="fa fa-times" aria-hidden="true"></i> </a> \
+                                      </td>'
+
+        myNode.appendChild(container)
+      }
+
+      var total = document.getElementById("totalamt");
+      var amt = parseInt(total.innerHTML.split(':')[1]);
+      amt+=parseInt(rate);
+      total.innerHTML = "Total : "+String(amt);
+
+    }
+
+
+
+    function findexpiry(obj)
+    {
+        pro = $(obj).parent().siblings()[1].innerHTML;
+        ed = $(obj).parent().siblings()[2];
+        for(var i=0;i<stockds.length;i++)
+        {
+            if(stockds[i].batch==obj.value)
+                if(stockds[i].name==pro)
+                    {
+                      ed.innerHTML=stockds[i].ed;
+                      new PNotify({
+                                  title: 'Note',
+                                  text: 'The item '+stockds[i].name+' stock amount left:'+stockds[i].count,
+                                  styling: 'bootstrap3',
+                                  type:'info'
+                        });
+                      break;
+                    }
+        }
+    }
+
+    var stockds = [];
+
+    function checkstock(product){
+        $.ajax({
+        url: '/ajax/checkstock/',
+        data: {
+          'item': product
+        },
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+                if(data['success']==0)
+                {
+                    new PNotify({
+                      title: 'Warning',
+                      text: 'The item '+data['item']+' is out of stock.',
+                      type: 'error',
+                      styling: 'bootstrap3'
+                  });
+                  returnval = [];
+                 }
+                 else if(data['success']==1)
+                 {
+
+                        new PNotify({
+                                  title: 'Note',
+                                  text: 'The item '+data['item']+' stock amount left:'+data['counts'][0].toString(),
+                                  styling: 'bootstrap3',
+                                  type:'info'
+                        });
+                        data['batches'].push(data['ed'][0]);
+                        returnval = data['batches'];
+                        for(var i=0;i<data['batches'].length;i++)
+                        {   stockobj = new Object;
+                            stockobj.name = product;
+                            stockobj.batch = data['batches'][i];
+                            stockobj.count = data['counts'][i];
+                            stockobj.ed = data['ed'][i];
+                            stockds.push(stockobj);
+                        }
+                 }
+            }
+        });
+        return returnval;
+        }
+
+  $(document).ready(function(){
+    $(".catbtn").click(function () {
+      var category= $(this).text();
+
+      $.ajax({
+        url: '/ajax/get_products/',
+        data: {
+          'category': category
+        },
+        dataType: 'json',
+        success: function (data) {
+          var myNode = document.getElementById("productdiv");
+          while (myNode.firstChild) {
+            myNode.removeChild(myNode.firstChild);
+          }
+          if(data.type=="product")
+          {    for (var i = 0; i < data.products.length; i++ ) {
+                  var container = document.createElement("button");
+                  container.className += "btn btn-default source"
+                  container.innerHTML = data.products[i].item_name;
+                  container.dataset.rate = String(data.products[i].MRP);
+                  container.onclick = function(){ addtobill($(this).text(),this.dataset.rate); };
+                  myNode.appendChild(container)
+               }
+          }
+          else
+          {
+              for (var i = 0; i < data.products.length; i++ ) {
+                      var container = document.createElement("button");
+                      container.className += "btn btn-default source";
+                      container.innerHTML = data.products[i].name;
+                      container.dataset.rate = String(data.products[i].rates);
+                      container.onclick = function(){ addtobill($(this).text(),this.dataset.rate); };
+                      myNode.appendChild(container)
+              }
+          }
+        }
+      });
+    });
+
+    $("#idbtn").click(function () {
+      id = [];
+      id.push(document.getElementById('q').value);
+
+      $.ajax({
+        url: '/ajax/search_id/',
+        data: {
+          'ID': id
+        },
+        dataType: 'json',
+        success: function (data) {
+            if (data['success']==1)
+            {   var x = document.getElementById('notify');
+                x.style.display = 'block';
+                var c = document.getElementById('c');
+                c.value = data.company_name;
+            }
+            else if (data['success']==2)
+            {   var x = document.getElementById('notify-info');
+                x.style.display = 'block';
+            }
+            else
+            {   var x = document.getElementById('notify-danger');
+                x.style.display = 'block';
+            }
+        }
+      });
+    });
+
+    function getSearchParameters() {
+      var prmstr = window.location.search.substr(1);
+      return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+    }
+
+    function transformToAssocArray( prmstr ) {
+        var params = {};
+        var prmarr = prmstr.split("&");
+        for ( var i = 0; i < prmarr.length; i++) {
+            var tmparr = prmarr[i].split("=");
+            params[tmparr[0]] = tmparr[1];
+        }
+        return params;
+    }
+
+    var params = getSearchParameters();
+    for (i=0; i<Object.keys(params).length/3; i++){
+        si=i.toString();
+        var product = params["p"+si].replace(/%20/g, " ");
+        var quantity = params["q"+si].replace(/%20/g, " ");
+        var rate = params["r"+si];
+        addtobill(product,rate,quantity);
+    }
+
+  });
+
+    function applyrate(){
+    var rate = document.getElementById('ec').value;
+    addtobill('Extra charges',rate,1);
+  }
+</script>

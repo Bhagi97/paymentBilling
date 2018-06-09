@@ -1,0 +1,41 @@
+<div class="page-title">
+                            <div class="title_left">
+                                  <h3 style="margin-left:20px;">Prescriptions Made</h3>
+                            </div>
+
+</div>
+
+    <div class="clearfix"></div>
+
+<div class="panel">
+
+                        <div id="collapseOne1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                          <div class="panel-body">
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>Patient Code</th>
+                                  <th>Patient Name</th>
+                                  <th>Consulting Doctor</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for f in prescriptionlist1 %}
+                                <tr>
+                                  <th><a href="/editprescription.html?id={{f.customer_code}}">{{f.customer_code}}</th>
+                                  <td>{{f.customer_name}}</a></td>
+                                  <td>{{f.doctor_name}}</td>
+                                </tr>
+                              {% endfor %}
+                              {% for f in prescriptionlist2 %}
+                                <tr>
+                                  <th><a href="/editprescription.html?id={{f.customer_code}}">{{f.customer_code}}</th>
+                                  <td>{{f.customer_name}}</a></td>
+                                  <td>{{f.doctor_name}}</td>
+                                </tr>
+                              {% endfor %}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+</div>

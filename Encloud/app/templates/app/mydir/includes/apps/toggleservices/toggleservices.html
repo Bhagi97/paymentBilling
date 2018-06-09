@@ -1,0 +1,71 @@
+<div class="page-title">
+                            <div class="title_left">
+                                  <h3 style="margin-left:20px;">My Services</h3>
+                            </div>
+                             <div class="title_right">
+                                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                                    <form action="viewfranchise.html" method="get">
+                                    <div class="input-group">
+                                        <input class="form-control" name="q" id="q" placeholder="Search for..." type="text">
+                                        <span class="input-group-btn">
+                                           <button class="btn btn-default" type="submit">Go!</button>
+                                        </span>
+
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+</div>
+
+    <div class="clearfix"></div>
+
+<div class="panel">
+        <form id="toggleform" action="toggleservices.html" method="post"> {% csrf_token %}
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                  <!-- -->
+                  <div class="x_panel">
+                  <div class="x_title">
+                    <h2><small>View services</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <!-- -->
+                  <div id="collapseOne1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                          <div class="panel-body">
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>Service Name</th>
+                                  <th>Enabled</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for c,m in services %}
+                                <tr>
+                                  <td>{{c.name}}</td>
+                                  <td><input id="{{c.id}}" name="{{c.id}}" class="flat" type="checkbox"
+                                      {% if m %}
+                                             checked
+                                      {% endif %}
+                                   >
+                                  </td>
+                                </tr>
+                              {% endfor %}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+              </div>
+        </form>
+                    <div class="actionBar">
+                    <a href="javascript:{}" class="buttonNext btn btn-success" onclick="document.getElementById('toggleform').submit();" id="finish">Save</a>
+                </div>
+</div>

@@ -1,0 +1,261 @@
+<div class="page-title">
+                            <div class="title_left">
+                                  <h3 style="margin-left:20px;">Service</h3>
+                            </div>
+                             <div class="title_right">
+                                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right ">
+                                    <div class="input-group">
+                                        <select id="q" class="form-control">
+                                          {% for c in services %}
+                                            <option value="{{c.name}}">{{c.name}}</option>
+                                          {% endfor %}
+                                        </select>
+                                      <script>
+                                        document.getElementById("q").selectedIndex = -1;
+                                      </script>
+                                    </div>
+
+                                </div>
+                            </div>
+</div>
+
+<div class="row">
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                  <!-- -->
+                  <div class="x_panel">
+                  <div class="x_title">
+                    <h2><small>View services</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <!-- -->
+                  <div id="collapseOne1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                          <div class="panel-body">
+                            <table id="datatable" class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>Service Name</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for c in services %}
+                                <tr>
+                                  <td><a href="#" onclick="getdetails('{{c.name}}')">{{c.name}}</a></td>
+                                </tr>
+                              {% endfor %}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><small>Add/Edit Service details</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <form id="serviceentry" method="post" enctype="multipart/form-data" action="serviceentry.html" data-parsley-validate class="form-horizontal form-label-left"> {% csrf_token %}
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id">Service ID
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="id" name="id" placeholder="Leave blank for new service" class="form-control col-md-7 col-xs-12" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">Code <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="code" name="code" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                        <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rates1">Rates <span class="required">*</span>
+                        </label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                          <input type="text" id="rates1" name="rates[]" required="required" placeholder="Brahmi" class="form-control col-md-7 col-xs-12">
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                          <input type="text" id="rates2" name="rates[]" required="required" placeholder="Tulsi" class="form-control col-md-7 col-xs-12">
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                          <input type="text" id="rates3" name="rates[]" required="required" placeholder="Arayaal" class="form-control col-md-7 col-xs-12">
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                          <input type="text" id="rates4" name="rates[]" required="required" placeholder="Ashoka" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tax_cgst">Tax <span class="required">*</span>
+                        </label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                          <input type="text" id="tax_cgst" name="tax_cgst" required="required" placeholder="CGST (%)" class="form-control col-md-7 col-xs-12">
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                          <input type="text" id="tax_sgst" name="tax_sgst" required="required" placeholder="SGST (%)" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="bodypart">Body Part
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select id="bodypart" name="bodypart" class="form-control">
+                            <option value="Hair">Hair</option>
+                              <option value="Head & Shoulder">Head & Shoulder</option>
+                              <option value="Full-body">Full-body</option>
+                              <option value="Hand">Hand</option>
+                              <option value="Leg">Leg</option>
+                            </select>
+                        </div>
+                      </div>
+                        <script>
+                              document.getElementById("bodypart").selectedIndex = -1;
+                        </script>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="image">Image
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="file" name="image" id="image" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+
+                      <div class="form-group" id="currentimagediv" style="display:none;">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="currentimage">Current Image
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <img src="" id="currentimage" class="form-control col-md-7 col-xs-12" style="height:auto;">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Description
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="description" name="description" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="remarks">Remarks
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="remarks" name="remarks"  class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                          <button type="button" class="buttonNext btn btn-danger" onclick="delete_service()">Delete</button>
+						  <button class="btn btn-primary" type="reset">Reset</button>
+                          <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+<script>
+  function launchajax(metalist)
+  {
+      $.ajax({
+        url: '/ajax/getservices/',
+        data: {
+          'metalist': metalist,
+        },
+        dataType: 'json',
+        success: function (data) {
+            document.getElementById("id").value = data.service.id;
+            document.getElementById("name").value = data.service.name;
+            document.getElementById("code").value = data.service.service_code;
+            document.getElementById("rates1").value = data.service.rates[0];
+            document.getElementById("rates2").value = data.service.rates[1];
+            document.getElementById("rates3").value = data.service.rates[2];
+            document.getElementById("rates4").value = data.service.rates[3];
+            document.getElementById("remarks").value = data.service.remarks;
+            document.getElementById("description").value = data.service.description;
+            document.getElementById("tax_cgst").value = data.service.tax_CGST;
+            document.getElementById("tax_sgst").value = data.service.tax_SGST;
+            $('[name=bodypart]').val(data.service.body_part);
+            if(data.service.image)
+                {
+                    document.getElementById("currentimagediv").style.display = 'block';
+                    document.getElementById("currentimage").src = '/media/'+data.service.image;
+                }
+        }
+      });
+  }
+
+  $(document).on('change','#q',function(){
+      var metalist = [];
+      metalist.push(document.getElementById("q").value);
+      launchajax(metalist);
+          });
+
+     function getdetails(sname)
+     {
+        $("#q").val(sname);
+        var metalist = [];
+        metalist.push(sname);
+        launchajax(metalist);
+     }
+
+     $(document).ready(function() {
+      $('#datatable').dataTable({bFilter: false, bInfo: false, bLengthChange: false});
+     } );
+
+     function delete_service()
+    {
+        del_id = document.getElementById("id").value;
+        if(del_id=='')
+            { alert("No service selected"); return; }
+        $.ajax({
+            url: '/ajax/deleteservice/',
+            data: {
+              'del_id': del_id,
+              },
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                if (data.success==1)
+                    { document.getElementById("message").innerHTML = 'Successfully deleted service';
+                      var x = document.getElementById('notify2');
+                      x.style.display = 'block';
+                      setTimeout(function(){ location.reload(); }, 2000);
+                    }
+                else
+                    {  document.getElementById("message-f").innerHTML = 'Failed to delete service - '+data.error;
+                       var x = document.getElementById('notify-f2');
+                       x.style.display = 'block';
+                    }
+              }
+        });
+    }
+</script>

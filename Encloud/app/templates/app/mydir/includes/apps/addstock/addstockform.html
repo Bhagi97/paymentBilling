@@ -1,0 +1,194 @@
+<div class="page-title">
+                            <div class="title_left">
+                                  <h3 style="margin-left:20px;">Add Stock</h3>
+                            </div>
+
+</div>
+
+<div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2> <small>Add a stock for a given item</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <form id="addstock" method="post" action="addstock.html" data-parsley-validate class="form-horizontal form-label-left"> {% csrf_token %}
+
+                      <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Item name  <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                             <select id="item_name" name="item_name" class="form-control" onchange="get_product()">
+                               {% for item in list %}
+                               <option value="{{item.id}}">{{item.item_name}}</option>
+                                {% endfor %}
+                              </select>
+                            </div>
+                          </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="stock_amount">Stock Quantity <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="stock_amount" name="stock_amount" required="required" data-parsley-trigger="change" data-parsley-pattern="\d+" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="purchase_rate" class="control-label col-md-3 col-sm-3 col-xs-12">Purchase Rate <span class="required">*</span> </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="purchase_rate" name="purchase_rate" class="form-control col-md-7 col-xs-12" data-parsley-trigger="change" data-parsley-pattern="(\d+\.\d+)|(\d+)" type="text" required="required">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="batch_no" class="control-label col-md-3 col-sm-3 col-xs-12">Supplier Name</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="vendor" name="vendor" class="form-control col-md-7 col-xs-12" type="text">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="address" class="control-label col-md-3 col-sm-3 col-xs-12">Address</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="address" name="address" class="form-control col-md-7 col-xs-12" type="text">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="gst_no" class="control-label col-md-3 col-sm-3 col-xs-12">GST No.</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="gst_no" name="gst_no" class="form-control col-md-7 col-xs-12" type="text">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="batch_no" class="control-label col-md-3 col-sm-3 col-xs-12">Batch No. <span class="required">*</span> </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="batch_no" name="batch_no" class="form-control col-md-7 col-xs-12" type="text" required="required">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="expiry_date" class="control-label col-md-3 col-sm-3 col-xs-12">Expiry Date <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="expiry_date" class="form-control col-md-7 col-xs-12" placeholder="DD/MM/YYYY" data-inputmask="'mask': '99/99/9999'" name="expiry_date" type="text" required="required">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tax_cgst">Tax <span class="required">*</span>
+                          </label>
+                          <div class="col-md-3 col-sm-3 col-xs-6">
+                            <input type="text" id="tax_cgst" name="tax_cgst" required="required" data-parsley-trigger="change" data-parsley-pattern="(\d+\.\d+)|(\d+)"  placeholder="CGST (%)" class="form-control col-md-7 col-xs-12" onchange="displayMRP()">
+                          </div>
+                          <div class="col-md-3 col-sm-3 col-xs-6">
+                            <input type="text" id="tax_sgst" name="tax_sgst" required="required" data-parsley-trigger="change" data-parsley-pattern="(\d+\.\d+)|(\d+)"  placeholder="SGST (%)" class="form-control col-md-7 col-xs-12" onchange="displayMRP()">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="hsn_code" class="control-label col-md-3 col-sm-3 col-xs-12">HSN Code <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="hsn_code" class="form-control col-md-7 col-xs-12" name="hsn_code" type="text" required="required">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="hsn_code" class="control-label col-md-3 col-sm-3 col-xs-12">Bill Rate </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="bill_rate" class="form-control col-md-7 col-xs-12" type="text" readonly>
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                          <button class="btn btn-primary" type="button">Cancel</button>
+						  <button class="btn btn-primary" type="reset">Reset</button>
+                          <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+<script>
+
+    let MRP = 0;
+
+    function get_product(){
+        const pid = $('#item_name').val();
+
+        $.ajax({
+        url: '/ajax/get_base_product/',
+        data: {
+          'id': pid
+        },
+        dataType: 'json',
+        success: function (data) {
+                if(data['success']==0)
+                {
+                    new PNotify({
+                      title: 'Warning',
+                      text: 'The item does not exist',
+                      type: 'error',
+                      styling: 'bootstrap3'
+                  });
+                 }
+                 else if(data['success']==1)
+                 {
+                    MRP = data.MRP;
+                    displayMRP();
+                 }
+
+            }
+        });
+
+    }
+
+    function displayMRP()
+    {
+        const c = parseFloat(document.getElementById('tax_cgst').value);
+        const s = parseFloat(document.getElementById('tax_sgst').value);
+        if (!(isNaN(c) || isNaN(s)))
+            document.getElementById('bill_rate').value = Math.round(((100.0 + c + s) / 100.0) * MRP);
+        else
+            document.getElementById('bill_rate').value = '';
+
+    }
+
+    $( document ).ready(function() {
+            get_product();
+    });
+    
+    function launchajax()
+    {
+      const sid = $('#q').val();
+      $.ajax({
+          url: '/ajax/get_stock_item/',
+          data: {
+            'id': sid,
+          },
+          dataType: 'json',
+          success: function (data) {
+              document.getElementById("stock_amount").value = data.stock_quantity;
+              document.getElementById("vendor").value = data.vendor;
+              document.getElementById("batch_no").value = data.batch_no;
+              document.getElementById("address").value = data.address;
+              document.getElementById("gst_no").value = data.gst_no;
+              document.getElementById("expiry_date").value = data.expiry_date;
+              document.getElementById("hsn_code").value = data.hsn_code;
+              document.getElementById("tax_cgst").value = data.tax_CGST;
+              document.getElementById("tax_sgst").value = data.tax_SGST;
+              $('[name=item_name]').val(data.pid);
+              get_product();
+              displayMRP();
+          }
+        });
+    }
+</script>
+
+

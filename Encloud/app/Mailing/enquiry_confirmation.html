@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #outer{
+          margin-left: 100px;
+          margin-right: 100px;
+        }
+      @media only screen and (max-width: 720px) {
+        #outer{
+          margin-left: 20px;
+          margin-right: 20px;
+        }
+      }
+      @media only screen and (max-width: 480px) {
+        #outer{
+          margin-left: 0px;
+          margin-right: 0px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div id="outer" style="background-color: #f3f3f3;">
+        <h2 style="text-align: center; padding: 20px; background: #228B22; /* for browsers that do not support gradients */     background: -webkit-linear-gradient(left top, #228B22,  #ADFF2F); /* for safari 5.1 to 6.0 */     background: -o-linear-gradient(bottom right, #228B22,  #ADFF2F); /* for opera 11.1 to 12.0 */   background: -moz-linear-gradient(bottom right, #228B22,  #ADFF2F); /* for firefox 3.6 to 15 */     background: linear-gradient(to bottom right, #228B22,  #ADFF2F);"><img src="http://clubayurveda.com/images/logo.png" alt="Clubayurveda logo" width="423" height="86" /></h2>
+        <div id="contents" style="padding-left: 20px; padding-right: 20px;">
+          <h2 style="text-align: center;">Welcome to Club Ayurveda</h2>
+          <p>Dear %(name)s,</p>
+          Thanks for selecting Club Ayurveda for giving you a better health services. Your appointment is confirmed for %(date)s at %(time)s in the selected Centre.
+          <br/>
+          Assuring you of our best services at all times.
+          <p>Yours sincerely, <br /> Customer Service Team <br /> Club Ayurveda Pvt. Ltd.</p>
+          <p><br/></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

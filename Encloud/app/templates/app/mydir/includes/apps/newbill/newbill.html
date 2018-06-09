@@ -1,0 +1,721 @@
+<div class="page-title col-md-12 col-sm-12 col-xs-12">
+                            <div class="title_left">
+                                  <h3 style="margin-left:20px;">Pharmacy Bill</h3>
+                            </div>
+
+                            <div class="title_right">
+                                <div class="col-md-7 col-sm-7 col-xs-12 form-group pull-right top_search">
+
+                                    <div class="input-group">
+                                        <input class="form-control" name="c" id="c" placeholder="Company Name" type="text" >
+                                        <span class="input-group-btn">
+                                        </span>
+                                        <input class="form-control" name="q" id="q" placeholder="Patient ID" type="text" >
+                                        <span class="input-group-btn">
+                                           <button id="idbtn" class="btn btn-default">Go!</button>
+                                        </span>
+                                    </div>
+
+
+                                </div>
+                             </div>
+
+</div>
+
+
+<div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <h2> Categories </h2>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <ul class="nav navbar-right panel_toolbox">
+                    <div class="title_right">
+                      <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search" style="margin-bottom: 0px">
+                        <div class="input-group">
+                            <input class="form-control" name="q_category" id="q_category" placeholder="Enter Category here" type="text" >
+                            <span class="input-group-btn">
+                               <button id="q_category_button" class="btn btn-default">&nbsp;</button>
+                            </span>
+                        </div>
+                      </div>
+                    </div>
+                  </ul>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+
+              <div class="x_content" style="overflow-y:scroll; height:150px;">
+                {% for category in categorylist%}
+                <button class="btn btn-default source catbtn" >{{category.category_name}}</button>
+                {% endfor %}
+              </div>
+
+
+             </div>
+</div>
+
+
+<div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <h2> Products </h2>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <ul class="nav navbar-right panel_toolbox">
+                    <div class="title_right">
+                      <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search" style="margin-bottom: 0px">
+                        <div class="input-group">
+                            <input class="form-control" name="q_product" id="q_product" placeholder="Enter Product here" type="text" >
+                            <span class="input-group-btn">
+                               <button id="q_product_button" class="btn btn-default">&nbsp;</button>
+                            </span>
+                        </div>
+                      </div>
+                    </div>
+                  </ul>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+
+              <div id="productdiv" class="x_content" style="overflow-y:scroll; height:150px;">
+
+              </div>
+
+             </div>
+</div>
+
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2> Bill </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="x_content" style="overflow-y:scroll; height:330px;">
+                    <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>Medicine Name</th>
+                                  <th>HSN Code</th>
+                                  <th>Batch No.</th>
+                                  <th>Expiry Date</th>
+                                  <th>Rate</th>
+                                  <th>Quantity</th>
+                                </tr>
+                              </thead>
+                              <tbody id="billbody">
+                              </tbody>
+                    </table>
+                  </div>
+
+
+
+                 </div>
+
+
+
+                <div class="actionBar" style="margin-bottom:20px;">
+                    <a disabled id="totalamt" class="buttonPrevious btn" style="margin-right:50px;">Total : 0</a>
+                    <a href="#" onclick="clearbill()" class="buttonPrevious btn btn-primary" >Clear</a>
+                    <a href="#" class="buttonNext btn btn-success" onclick="printbill(0)">Print Bill</a>
+                    <a href="#" class="buttonNext btn btn-success" onclick="printbill(1)">Print Bill (To Company)</a>
+
+                </div>
+</div>
+
+<!-- Modal to print -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Final Bill</h4>
+      </div>
+      <div class="modal-body" style="height:70vh;">
+        <img style="position:absolute; top:50%; left:50%; max-height:90%;max-width:80%;-webkit-transform: translate(-50%, -50%);display:block;" id="bill_img">
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="buttonNext btn btn-success" onclick="printImg()">Print Bill</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href=location.href.slice(0,-1)">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--End of print modal-->
+
+<!-- No stock modal-->
+<div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">The following items are out of stock</h4>
+      </div>
+      <div class="modal-body">
+                <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>Item Name</th>
+                                  <th>Status</th>
+                                </tr>
+                              </thead>
+                              <tbody id="myModal2_body">
+                              </tbody>
+                </table>
+      </div>
+      <div class="modal-footer">
+          <!--<button type="button" class="buttonNext btn btn-success" onclick="printBillAnyway()" data-dismiss="modal">Print Bill Anyway</button>-->
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--End of no stock modal-->
+
+<!-- Modal to ask extra charge -->
+<div id="ecModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Enter extra charge</h4>
+      </div>
+      <div class="modal-body" style="height:30vh;">
+        <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ec">Extra Charge <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="ec" name="ec" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="buttonNext btn btn-success" onclick="applyrate()" data-dismiss="modal">Apply</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--End of extra charge modal-->
+
+
+{% include "app/mydir/common/verificationmodal.html" %}
+
+<script>
+
+    var stockds = [];
+    var billids = [];
+
+    function addcount(o){
+      ele = o.parentNode.getElementsByTagName('input')[0];
+      ele.value = parseInt(ele.value)+1;
+      var rate = o.parentNode.parentNode.getElementsByTagName('td')[4].innerHTML.split(/[";]+/);
+      rate = rate[rate.length-1];
+      var total = document.getElementById("totalamt");
+      var amt = parseInt(total.innerHTML.split(':')[1]);
+      amt+=parseInt(rate);
+      total.innerHTML = "Total : "+String(amt);
+    }
+
+    function subcount(o){
+      ele = o.parentNode.getElementsByTagName('input')[0];
+      if (ele.value>1)
+        {   ele.value = parseInt(ele.value)-1;
+            var rate = o.parentNode.parentNode.getElementsByTagName('td')[4].innerHTML.split(/[";]+/);
+            rate = rate[rate.length-1];
+            var total = document.getElementById("totalamt");
+            var amt = parseInt(total.innerHTML.split(':')[1]);
+            amt-=parseInt(rate);
+            total.innerHTML = "Total : "+String(amt);
+        }
+    }
+
+    function delrow(o){
+      ele = o.parentNode.parentNode;
+      var myNode = document.getElementById("billbody");
+      var children = myNode.children;
+      for (var i = 0; children[i] != ele; i++) {}
+      var rate = children[i].getElementsByTagName('td')[4].innerHTML.split(/[";]+/);
+      rate = rate[rate.length-1];
+      var quant = children[i].getElementsByTagName('td')[5].getElementsByTagName('input')[0].value;
+      myNode.removeChild(children[i]);
+      let del_val = i;
+      for (; i < children.length; i++) {
+        e = children[i].getElementsByTagName('th')[0];
+        e.innerHTML = parseInt(e.innerHTML)-1;
+      }
+      stockds.splice(del_val,1);
+
+
+      var total = document.getElementById("totalamt");
+      var amt = parseInt(total.innerHTML.split(':')[1]);
+      amt-=(parseInt(quant)*parseInt(rate));
+      total.innerHTML = "Total : "+String(amt);
+    }
+
+    function clearbill(){
+      var myNode = document.getElementById("billbody");
+      while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+      }
+    }
+
+    function printImg() {
+      url = document.getElementById("bill_img").src;
+      url = url.slice(0,-4);
+      url = url+'.pdf';
+      window.open(url, '_blank', 'fullscreen=yes');
+    }
+
+
+    var doctor = '';
+    function printbill(company_flag){
+
+      productlist = billids;
+      quantitylist = [];
+      rlist = [];
+      metalist = [];
+      metalist.push(document.getElementById("q").value);
+      metalist.push(document.getElementById("c").value);
+      metalist.push(company_flag);
+      metalist.push(doctor);
+      var children = document.getElementById("billbody").children;
+      for (var i = 0; i < children.length; i++){
+        quantitylist.push(children[i].getElementsByTagName('td')[5].getElementsByTagName('input')[0].value);
+        rlist.push(children[i].getElementsByTagName('td')[4].innerHTML);
+      }
+
+      $.ajax({
+        url: '/ajax/printbill/',
+        data: {
+          'productlist': productlist,
+          'ratelist': rlist,
+          'quantitylist': quantitylist,
+          'metalist': metalist
+        },
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+            var body = "";
+            if(data['success']==0)
+            {   for (var j = 0; j < data['status'].length; j++) {
+                    if(data['status'][j]!='Positive')
+                        var s = '<tr> \
+                        <th scope="row">'+String(j+1)+'</th> \
+                        <td>'+productlist[j]+'</td> \
+                        <td>'+data['status'][j]+'</td> \
+                        </tr>';
+                        body = body+s;
+                }
+                document.getElementById('myModal2_body').innerHTML = body;
+                $("#myModal2").modal();
+            }
+            else
+            {
+                document.getElementById("bill_img").src="/media/bill/"+data.filename+".jpg";
+                $("#myModal").modal();
+            }
+        }
+      });
+    }
+
+    function selformat(opt){
+        return '<option value="'+opt+'">'+opt+'</option>';
+    }
+
+
+    function discountify(rate) {
+        const rates = rate.split(',');
+        return '<i class="fa fa-arrow-circle-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;' +
+                 '<strike>'+rates[0]+'</strike>&nbsp;&nbsp;&nbsp;&nbsp;'+rates[1];
+
+    }
+
+
+    function addtobill(product,pid,val){
+
+      const myNode = document.getElementById("billbody");
+      let container = document.createElement("tr");
+      const children = myNode.children;
+
+      if(product=='Extra Charges')  // Edge Case
+        {
+          $("#ecModal").modal();
+          return;
+        }
+      if (product == "Consultation fee") // Edge Case
+        {   let thisproduct_stock=[];
+            let stockobj = new Object;
+            stockobj.name = "Consultation fee";
+            stockobj.id = -1; //To  flag in back end as NOT PRODUCT
+            stockobj.batch = '';
+            stockobj.count = '';
+            stockobj.ed = '';
+            stockobj.rate = pid; //Double meaning - pid serves as rate here
+            stockobj.hsncode = '';
+            thisproduct_stock.push(stockobj);
+            stockds.push(thisproduct_stock);
+            billids.push(stockobj);
+            rval = [1]; //To pass test rval.length test
+        }
+      else {
+          for (var i = 0; i < children.length ; i++) {
+            if (children[i].getElementsByTagName('td')[0].innerHTML == product){
+              alert("Product already added.");
+              return;
+            }
+          }
+          rval = checkstock(product,pid);          // Check stock
+      }
+      if(rval.length==0)                 // Exit if no stock
+          return;
+
+
+
+      let ed, rate, index;
+      let batchnos= "", hsncodes= "";
+      let hsnarray = [];
+      if (i == children.length){
+
+        index = stockds.length-1;
+        for(var i=0; i<stockds[index].length; i++) {
+
+            if (hsnarray.indexOf(stockds[index][i]['hsncode']) < 0){
+                hsncodes += selformat(stockds[index][i]['hsncode']);
+                hsnarray.push(stockds[index][i]['hsncode']);
+            }
+            batchnos+=(stockds[index][i]['batch']===stockds[index][0]['batch']?selformat(stockds[index][i]['batch']):'');
+        }
+
+        ed=stockds[index][0]['ed'];
+        billids.push(stockds[index][0]['id']);
+        rate=stockds[index][0]['rate'];
+        if (val === undefined)
+            val='1';
+
+        container.id = String(myNode.childElementCount+1);
+        let myrate = rate;
+        if (typeof(myrate)=='string')
+            if (myrate.includes(',')) {
+                myrate = discountify(myrate);
+                rate = parseFloat(rate.split(',')[1]);
+            }
+
+        container.innerHTML = '<th scope="row">'+String(myNode.childElementCount+1)+'</th> \
+                                      <td>'+product+'</td> \
+                                      <td><select class="hsncode" onchange="findbatchcodes(this,'+index.toString()+')">'+hsncodes+' \
+                                      <td><select class="batchno" onchange="findexpiry(this,'+index.toString()+')">'+batchnos+' \
+                                      </select></td> \
+                                      <td>'+ed+'</td> \
+                                      <td>'+myrate+'</td> \
+                                      <td> \
+                                        <a href="#" onclick="addcount(this)"> <i class="fa fa-plus" style="margin-right:5px;" aria-hidden="true"></i></a> \
+                                        <a href="#" onclick="subcount(this)"> <i class="fa fa-minus" style="margin-right:5px;" aria-hidden="true"></i></a> \
+                                        <input style="width: 35px;height: 25px;margin-right:5px;" type="text" value="'+val+'" > \
+                                        <a href="#" onclick="delrow(this)"> <i class="fa fa-times" aria-hidden="true"></i> </a> \
+                                      </td>'
+
+        myNode.appendChild(container)
+      }
+
+      var total = document.getElementById("totalamt");
+      var amt = parseInt(total.innerHTML.split(':')[1]);
+      amt+=parseInt(rate);
+      total.innerHTML = "Total : "+String(amt);
+
+    }
+
+
+    function findbatchcodes(obj,index)
+    {
+        index = parseInt($(obj).parent().siblings()[0].innerHTML)-1;
+        pro = $(obj).parent().siblings()[1].innerHTML;
+        bc = $($(obj).parent().siblings()[2]).children()[0];
+        ed = $(obj).parent().siblings()[3];
+        ra = $(obj).parent().siblings()[4];
+        q = $($(obj).parent().siblings()[5]).children()[2];
+        bc.innerHTML = '';
+        let first=1;
+        for(var i=0;i<stockds[index].length;i++)
+        {
+            if(stockds[index][i].hsncode==obj.value)
+                if(stockds[index][i].name==pro)
+                    {
+                      bc.innerHTML+=selformat(stockds[index][i].batch);
+                      if (first)
+                        {
+                            ed.innerHTML=stockds[index][i].ed;
+                            billids[index]=stockds[index][i].id;
+                            let total = document.getElementById("totalamt");
+                            let amt = parseInt(total.innerHTML.split(':')[1]);
+                            let new_rate = stockds[index][i].rate;
+                            let old_rate = ra.innerHTML.split(/[";]+/);
+                            old_rate = old_rate[old_rate.length-1];
+                            if(typeof(new_rate)==='string'){
+                                ra.innerHTML = discountify(new_rate);
+                                new_rate = ra.innerHTML.split(/[";]+/);
+                                new_rate = parseFloat(new_rate[new_rate.length-1]);
+                            }
+                            else{
+                                ra.innerHTML= new_rate;
+                            }
+
+                            amt+=(parseInt(q.value)*(new_rate-old_rate));
+                            total.innerHTML = "Total : "+String(amt);
+                            new PNotify({
+                                  title: 'Note',
+                                  text: 'Item '+stockds[index][i].name+'\<br> Batch No: '+stockds[index][i].batch+'/<br> Stock Quantity available: '+stockds[index][i].count,
+                                  styling: 'bootstrap3',
+                                  type:'info'
+                            });
+                            first=0;
+                        }
+                    }
+        }
+
+    }
+
+    function findexpiry(obj,index)
+    {
+        index = parseInt($(obj).parent().siblings()[0].innerHTML)-1;
+        pro = $(obj).parent().siblings()[1].innerHTML;
+        hsn = $(obj).parent().siblings()[2];
+        ed = $(obj).parent().siblings()[3];
+        ra = $(obj).parent().siblings()[4];
+        q = $($(obj).parent().siblings()[5]).children()[2];
+        for(var i=0;i<stockds[index].length;i++)
+        {
+            if(stockds[index][i].batch==obj.value)
+              if(stockds[index][i].hsncode==$(hsn).children()[0].value)
+                if(stockds[index][i].name==pro)
+                    {
+                      ed.innerHTML=stockds[index][i].ed;
+                      billids[index]=stockds[index][i].id;
+                      const total = document.getElementById("totalamt");
+                      let amt = parseInt(total.innerHTML.split(':')[1]);
+                      let new_rate = stockds[index][i].rate;
+                      let old_rate = ra.innerHTML.split(/[";]+/);
+                      old_rate = old_rate[old_rate.length-1];
+                      if(typeof(new_rate)==='string'){
+                          ra.innerHTML = discountify(new_rate);
+                          new_rate = ra.innerHTML.split(/[";]+/);
+                          new_rate = parseFloat(new_rate[new_rate.length-1]);
+                      }
+                      else{
+                          ra.innerHTML= new_rate;
+                      }
+                      amt+=(parseInt(q.value)*(new_rate-old_rate));
+                      total.innerHTML = "Total : "+String(amt);
+                      new PNotify({
+                                  title: 'Note',
+                                  text: 'Item '+stockds[index][i].name+' \<br> Batch No: '+stockds[index][i].batch+' \<br> Stock quantity available: '+stockds[index][i].count,
+                                  styling: 'bootstrap3',
+                                  type:'info'
+                        });
+                      break;
+                    }
+        }
+    }
+
+    function checkstock(product,pid){
+        var returnval = [];
+        $.ajax({
+        url: '/ajax/checkstock/',
+        data: {
+          'id': pid
+        },
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+                if(data['success']==0)
+                {
+                    new PNotify({
+                      title: 'Warning',
+                      text: 'The item '+product+' is out of stock.',
+                      type: 'error',
+                      styling: 'bootstrap3'
+                  });
+                 }
+                 else if(data['success']==1)
+                 {
+                        new PNotify({
+                                  title: 'Note',
+                                  text: 'Item: '+product+'\<br> Batch No: '+data['batches'][0]+'\<br> Stock Quantity available: '+data['counts'][0].toString(),
+                                  styling: 'bootstrap3',
+                                  type:'info'
+                        });
+                        returnval = data['batches'].length;
+                        let thisproduct_stock = [];
+                        for(var i=0;i<data['batches'].length;i++)
+                        {   stockobj = new Object;
+                            stockobj.name = product;
+                            stockobj.id = data['ids'][i];
+                            stockobj.batch = data['batches'][i];
+                            stockobj.count = data['counts'][i];
+                            stockobj.ed = data['ed'][i];
+                            stockobj.rate = data['rates'][i];
+                            stockobj.hsncode= data['hsncodes'][i];
+                            thisproduct_stock.push(stockobj);
+                        }
+                        stockds.push(thisproduct_stock);
+                 }
+            }
+        });
+        return returnval;
+        }
+
+  $(document).ready(function(){
+
+      const cbs = document.getElementsByClassName('catbtn');
+      const categories = [];
+      for (var i =0; i< cbs.length; i++) categories.push(cbs[i].innerHTML);
+
+      var pbs = null;
+      var products = [];
+
+      $(".catbtn").click(function () {
+          var category= $(this).text();
+
+          $.ajax({
+            url: '/ajax/get_products/',
+            data: {
+              'category': category
+            },
+            dataType: 'json',
+            success: function (data) {
+              var myNode = document.getElementById("productdiv");
+              while (myNode.firstChild) {
+                myNode.removeChild(myNode.firstChild);
+              }
+              if(data.type=="product")
+              {    for (var i = 0; i < data.products.length; i++ ) {
+                      var container = document.createElement("button");
+                      container.className += "btn btn-default source pbtn"
+                      container.innerHTML = data.products[i].item_name;
+                      container.dataset.pid = String(data.products[i].id);
+                      container.onclick = function(){ addtobill($(this).text(),this.dataset.pid); };
+                      myNode.appendChild(container)
+                   }
+              }
+              else
+              {
+                  for (var i = 0; i < data.products.length; i++ ) {
+                          var container = document.createElement("button");
+                          container.className += "btn btn-default source pbtn";
+                          container.innerHTML = data.products[i].name;
+                          container.dataset.rate = String(data.products[i].rates);
+                          container.onclick = function(){ addtobill($(this).text(),this.dataset.rate); };
+                          myNode.appendChild(container)
+                  }
+              }
+              pbs = document.getElementsByClassName('pbtn');
+              products = [];
+              for (var i =0; i< pbs.length; i++) products.push(pbs[i].innerHTML);
+
+            }
+          });
+      });
+
+    $("#idbtn").click(function () {
+      id = [];
+      id.push(document.getElementById('q').value);
+
+      $.ajax({
+        url: '/ajax/search_id/',
+        data: {
+          'ID': id
+        },
+        dataType: 'json',
+        success: function (data) {
+            if (data['success']==1)
+            {   document.getElementById('notify2').style.display = 'block';
+                document.getElementById('message').innerHTML = 'ID found';
+                document.getElementById('c').value = data.company_name;
+            }
+            else if (data['success']==2)
+            {   document.getElementById('customercode').value = id[0];
+                $("#verificationModal").modal();
+
+            }
+            else
+            {   document.getElementById('notify-f2').style.display = 'block';
+                document.getElementById('message-f').innerHTML = 'ID not found';
+            }
+        }
+      });
+    });
+
+
+    $('#q_category').keyup(function () {
+       var search = document.getElementById('q_category').value;
+       for (var i =0; i< cbs.length; i++)
+           if (categories[i].toLowerCase().indexOf(search.toLowerCase())>-1)
+                cbs[i].style.display='';
+           else
+               cbs[i].style.display='none';
+    });
+
+    $('#q_product').keyup(function () {
+       var search = document.getElementById('q_product').value;
+       for (var i =0; i< pbs.length; i++)
+           if (products[i].toLowerCase().indexOf(search.toLowerCase())>-1)
+                pbs[i].style.display='';
+           else
+               pbs[i].style.display='none';
+    });
+
+    function getSearchParameters() {
+      var prmstr = window.location.search.substr(1);
+      return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+    }
+
+    function transformToAssocArray( prmstr ) {
+        var params = {};
+        var prmarr = prmstr.split("&");
+        for ( var i = 0; i < prmarr.length; i++) {
+            var tmparr = prmarr[i].split("=");
+            params[tmparr[0]] = tmparr[1];
+        }
+        return params;
+    }
+
+    var params = getSearchParameters();
+    for (i=0; i<(Object.keys(params).length-2)/3; i++){
+        si=i.toString();
+        var product = params["p"+si].replace(/%20/g, " ");
+        var quantity = params["q"+si].replace(/%20/g, " ");
+        var rate = params["r"+si];
+        addtobill(product,rate,quantity);
+    }
+    if(Object.keys(params).length>0)
+    { document.getElementById('q').value = params["id"]; doctor = params["doctor"];  }
+
+  });
+
+    function applyrate(){
+    var rate = document.getElementById('ec').value;
+    addtobill('Extra charges',rate,1);
+
+  }
+</script>

@@ -1,0 +1,517 @@
+          <div class="">
+            <div class="page-title" style="margin-bottom:10px;">
+              <div class="title_left">
+                <h3>Add Franchisee</h3>
+              </div>
+
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="row">
+
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Form Wizard</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+
+                    <!-- Smart Wizard -->
+                    <p>This form adds a new franchisee to your business.</p>
+                    <div id="wizard" class="form_wizard wizard_horizontal">
+                      <ul class="wizard_steps">
+                        <li>
+                          <a id="button1" class="selected" isdone="1">
+                            <span class="step_no">1</span>
+                            <span class="step_descr">
+                                              Step 1<br />
+                                              <small>Basic Details</small>
+                                          </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a id="button2" class="disabled" isdone="0">
+                            <span class="step_no">2</span>
+                            <span class="step_descr">
+                                              Step 2<br />
+                                              <small>Location</small>
+                                          </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a id="button3" class="disabled" isdone="0">
+                            <span class="step_no">3</span>
+                            <span class="step_descr">
+                                              Step 3<br />
+                                              <small>Owner Details</small>
+                                          </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a id="button4" class="disabled" isdone="0">
+                            <span class="step_no">4</span>
+                            <span class="step_descr">
+                                              Step 4<br />
+                                              <small>Permissions</small>
+                                          </span>
+                          </a>
+                        </li>
+                      </ul>
+                      <form id="addform" action="viewfranchise.html" method="post" data-parsley-validate="" class="form-horizontal form-label-left"> {% csrf_token %}
+                      <div id="step-1" style="display:block;">
+
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="franchise-name">Franchisee Name </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="franchise-name" name="franchise-name" required="required" class="form-control col-md-7 col-xs-12">
+                              <p id="up" style="margin-top:7px"></p>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Franchisee Type</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                             <select id="franchise-type" name="franchise-type" class="form-control">
+                               <option value="Brahmi">Brahmi</option>
+                               <option value="Tulsi">Tulsi</option>
+                               <option value="Arayaal">Arayaal</option>
+                               <option value="Ashoka">Ashoka</option>
+                             </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phoneno">Phone Number </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="phoneno" name="phoneno" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Address </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <textarea id="address" name="address" class="form-control col-md-7 col-xs-12" rows="3" required="required" ></textarea>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="town">Town </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="town" name="town" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="country">Country </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select id="country" name="country" class="form-control">
+                              <option value="India">India</option>
+                            </select>
+                            <script>
+                              document.getElementById("country").selectedIndex = -1;
+                            </script>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="state">State </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select id="state" name="state" class="form-control">
+
+                            </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="district">District </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select id="district" name="district" class="form-control">
+
+                            </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pincode">Pin Code </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="pincode" name="pincode" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+
+                      </div>
+                      <div id="step-2" style="display:none;">
+
+
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="bankaccountno">Bank Account No</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="bankaccountno" name="bankaccountno" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="bankname">Bank Name</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="bankname" name="bankname" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ifsccode">IFSC Code</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="ifsccode" name="ifsccode" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gstno">GST No.</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="gstno" name="gstno" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dlo">Drug License No.</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="dlo" name="dlo" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="website">Website Link</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="website" name="website" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="remarks">Remarks </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <textarea id="remarks" name="remarks" class="form-control col-md-7 col-xs-12" rows="3" required="required" ></textarea>
+                            </div>
+                          </div>
+                      </div>
+                      <div id="step-3" style="display:none;">
+
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="owner">Owner Name </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="owner" name="owner" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="username" name="username" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                            <p id="up2" style="margin-top:7px"></p>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="emailid">E Mail ID</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="email" id="emailid" name="emailid" required="required" data-parsley-trigger="change" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ownercontact">Contact Number </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="ownercontact" name="ownercontact" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ownercontact">Vendor </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <select id="vendor" name="vendor" class="form-control">
+                                {% for d in vendor_list %}
+                                <option value="{{d.id}}">{{d.name}} ({{d.user.username}})</option>
+                                {% endfor %}
+                              </select>
+                            </div>
+                          </div>
+                      </div>
+
+                      <div id="step-4" style="display:none;">
+
+                        <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="permu1">User Settings </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="checkbox">
+                            <label class="">
+                              <input id="permu1" name="permu1" class="flat" checked="checked"  type="checkbox">Add new users
+                            </label>
+                          </div>
+                          <div class="checkbox">
+                            <label class="">
+                              <input id="permu2" name="permu2" class="flat" checked="checked"  type="checkbox">Modify other users
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+
+                        <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="im_c">Inventory Management</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="checkbox">
+                            <label class="">
+                              <input id="im_c" name="im_c" class="flat" type="checkbox">Category
+                            </label>
+                          </div>
+                          <div class="checkbox">
+                            <label class="">
+                              <input id="im_pr" name="im_pr" class="flat" checked="checked"  type="checkbox">Products
+                            </label>
+                          </div>
+                          <div class="checkbox">
+                            <label class="">
+                              <input id="im_pa" name="im_pa" class="flat" checked="checked"  type="checkbox">Toggle Packages
+                            </label>
+                          </div>
+                          <div class="checkbox">
+                            <label class="">
+                              <input id="im_se" name="im_se" class="flat" checked="checked"  type="checkbox">Toggle Services
+                            </label>
+                          </div>
+                          <div class="checkbox">
+                            <label class="">
+                              <input id="im_tr" name="im_tr" class="flat" checked="checked"  type="checkbox">Modify Treatments
+                            </label>
+                          </div>
+                          <div class="checkbox">
+                            <label class="">
+                              <input id="im_sa" name="im_sa" class="flat" checked="checked"  type="checkbox">Stock Addition
+                            </label>
+                          </div>
+                          <div class="checkbox">
+                            <label class="">
+                              <input id="im_st" name="im_st" class="flat" checked="checked"  type="checkbox">Stock Transfer
+                            </label>
+                          </div>
+
+                        </div>
+                      </div>
+
+                        <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="perm1">Discount Permissions </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="checkbox">
+                            <label class="">
+                              <input id="perm1" name="perm1" class="flat" checked="checked"  type="checkbox">Item-wise
+                            </label>
+                          </div>
+                          <div class="checkbox">
+                            <label class="">
+                              <input id="perm2" name="perm2" class="flat" checked="checked"  type="checkbox">Category-wise
+                            </label>
+                          </div>
+                          <div class="checkbox">
+                            <label class="">
+                              <input id="perm3" name="perm3" class="flat" checked="checked" type="checkbox">Price
+                            </label>
+                          </div>
+                          <div class="checkbox">
+                            <label class="">
+                              <input id="perm4" name="perm4" class="flat" checked="checked" type="checkbox">Percentage
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+
+
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="permr1">Report Permissions </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="checkbox">
+                                  <label class="">
+                                    <input id="permr1" name="permr1" class="flat"  checked="checked" type="checkbox"> Sales
+                                  </label>
+                                </div>
+                                <div class="checkbox">
+                                  <label class="">
+                                    <input id="permr2" name="permr2" class="flat" checked="checked"  type="checkbox"> Stock
+                                  </label>
+                                </div>
+                                <div class="checkbox">
+                                  <label class="">
+                                    <input id="permr5" name="permr5" class="flat" checked="checked"  type="checkbox"> Audit
+                                  </label>
+                                </div>
+                                <div class="checkbox">
+                                  <label class="">
+                                    <input id="permr3" name="permr3" class="flat"  checked="checked" type="checkbox"> Receipt
+                                  </label>
+                                </div>
+                                <div class="checkbox">
+                                  <label class="">
+                                    <input id="permr6" name="permr6" class="flat" checked="checked"  type="checkbox"> Enquiry
+                                  </label>
+                                </div>
+                                <div class="checkbox">
+                                  <label class="">
+                                    <input id="permr7" name="permr7" class="flat" checked="checked"  type="checkbox"> Prescription
+                                  </label>
+                                </div>
+                        </div>
+                      </div>
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="permb1">Bill Permissions </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="checkbox">
+                                  <label class="">
+                                    <input id="permb1" name="permb1" class="flat" checked="checked"  type="checkbox"> Bill
+                                  </label>
+                                </div>
+                                <div class="checkbox">
+                                  <label class="">
+                                    <input id="permb2" name="permb2" class="flat"  checked="checked" type="checkbox"> Receipt
+                                  </label>
+                                </div>
+                                <div class="checkbox">
+                                  <label class="">
+                                    <input id="permb6" name="permb6" class="flat"  type="checkbox"> Delete Bill
+                                  </label>
+                                </div>
+                         </div>
+                      </div>
+                        <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="permd1">Doctor Patient Module</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                               <div class="checkbox">
+                                  <label class="">
+                                    <input id="permd5" name="permd5" class="flat"  checked="checked" type="checkbox"> Address Enquiries
+                                  </label>
+                                </div>
+                                <div class="checkbox">
+                                  <label class="">
+                                    <input id="permd1" name="permd1" class="flat" checked="checked"  type="checkbox"> Schedule Appointment
+                                  </label>
+                                </div>
+                                <div class="checkbox">
+                                  <label class="">
+                                    <input id="permd2" name="permd2" class="flat" checked="checked"  type="checkbox"> View Patient Details
+                                  </label>
+                                </div>
+                                <div class="checkbox">
+                                  <label class="">
+                                    <input id="permd3" name="permd3" class="flat" checked="checked" type="checkbox"> Prescribe
+                                  </label>
+                                </div>
+                                <div class="checkbox">
+                                  <label class="">
+                                    <input id="permd4" name="permd4" class="flat"  checked="checked" type="checkbox"> View Doctor Details
+                                  </label>
+                                </div>
+                                <div class="checkbox">
+                                  <label class="">
+                                    <input id="permd6" name="permd6" class="flat"  checked="checked" type="checkbox"> Add/Edit Customers
+                                  </label>
+                                </div>
+                                <div class="checkbox">
+                                  <label class="">
+                                    <input id="permd7" name="permd7" class="flat" checked="checked" type="checkbox"> View/Edit Scans
+                                  </label>
+                                </div>
+                        </div>
+                      </div>
+
+                        <hr>
+
+                        <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="permbs1">Bill Settings </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="checkbox">
+                            <label class="">
+                              <input id="permbs1" name="permbs1" class="flat" checked="checked"  type="checkbox">Include Club Ayurveda Header
+                            </label>
+                          </div>
+                          <div class="checkbox">
+                            <label class="">
+                              <input id="permbs2" name="permbs2" class="flat" checked="checked"  type="checkbox">Include Club Ayurveda Footer
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                          <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Currency</label>
+                            <div class="col-md-3 col-sm-3 col-xs-12" style="margin-left:20px;">
+                             <select id="currency" name="currency" class="form-control">
+                               <option value="Rupees">Rupees</option>
+                             </select>
+                            </div>
+                            </div>
+                        <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="permb3">Bill Categories </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="checkbox">
+                            <label class="">
+                              <input id="permb3" name="permb3" class="flat" checked="checked"  type="checkbox">Pharmacy
+                            </label>
+                          </div>
+                          <div class="checkbox">
+                            <label class="">
+                              <input id="permb4" name="permb4" class="flat" checked="checked"  type="checkbox">In Patient
+                            </label>
+                          </div>
+                          <div class="checkbox">
+                            <label class="">
+                              <input id="permb5" name="permb5" class="flat" checked="checked"  type="checkbox">Packages
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+
+                      </div>
+                        {% include "app/mydir/includes/apps/addfranchise/actionbar.html" %}
+                    </form>
+                    </div>
+                    <!-- End SmartWizard Content -->
+
+          <script>
+          jQuery('#franchise-name').on('input propertychange paste', function() {
+              var text = $(this).val()
+              $.ajax({
+              url: '/ajax/checkfranchisename/',
+              data: {
+                'name': $(this).val()
+              },
+              dataType: 'json',
+              async: false,
+              success: function (data) {
+                  var d = document.getElementById("up")
+                  if(text!='')
+                    d.innerHTML = data.message;
+                  else
+                    d.innerHTML='';
+                  d.style.color = data.colour;
+              }
+            });
+          });
+
+          </script>
+
+          <script>
+          jQuery('#username').on('input propertychange paste', function() {
+              var text = $(this).val()
+              $.ajax({
+              url: '/ajax/checkusername/',
+              data: {
+                'username': $(this).val()
+              },
+              dataType: 'json',
+              async: false,
+              success: function (data) {
+                  var d = document.getElementById("up2")
+                  if(text!='')
+                    d.innerHTML = data.message;
+                  else
+                    d.innerHTML='';
+                  d.style.color = data.colour;
+              }
+            });
+          });
+
+          </script>
+
+
+
+
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>

@@ -1,0 +1,140 @@
+<div class="panel">
+
+                        <div id="collapseOne1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                          <div class="panel-body">
+                            <table class="table table-striped" id="datatable">
+                              <thead>
+                                <tr>
+                                  {% for m in meta %}
+                                  <th>{{ m }}</th>
+                                  {% endfor %}
+                                  <th>Franchisee</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for r in receipt %}
+                                <tr>
+                                  <td scope="row">{{r.receipt_id}}</td>
+                                  <td scope="row">{{r.date}}</td>
+                                  <td scope="row">{{r.customer.customer_code}}</td>
+                                  <td scope="row">{{r.cashier.name}}</td>
+                                  <td scope="row">{{r.method}}</td>
+                                  <td>{{r.type}}</td>
+                                  <td scope="row">{{r.details}}</td>
+                                  <td scope="row">{{r.amount}}</td>
+                                  <td scope="row">{{r.bill.id}}</td>
+                                  <td scope="row">{{r.franchise.franchise_name}}</td>
+                                </tr>
+                              {% endfor %}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        {% include "app/mydir/includes/apps/reports/actionbar.html" %}
+</div>
+
+
+<!-- Modal to ask filtration criteria -->
+<div id="filterModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Enter filtration criteria</h4>
+      </div>
+      <div class="modal-body" style="">
+        <div class="form-group">
+                        <form id="filterform" action="report_receipt.html" method="post" class="form-horizontal form-label-left"> {% csrf_token %}
+
+                            <div class="form-group" id="date_container">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="date_container">Date Range</label>
+                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                    <div>
+                                        <div id="reportrange_right" class="pull-left" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                                          <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                                          <span id="spandate">December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                                        </div>
+                                        <input type="text" id="date" name="date" class="form-control col-md-7 col-xs-12" style="display:none;">
+                                    </div>
+                                </div>
+                        </div>
+
+                        {% if franchise_list %}
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="franchise">Franchise</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select id="franchise" name="franchise__id" class="form-control">
+                              <option value="0">Main Office</option>
+                              {% for f in franchise_list %}
+                                <option value="{{f.id}}">{{f.franchise_name}}</option>
+                              {% endfor %}
+                            </select>
+                            </div>
+                            <script>
+                              document.getElementById("franchise").selectedIndex = -1;
+                            </script>
+                        </div>
+                        {% endif %}
+
+                        <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="type">Payment Type</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <select id="type" name="type" class="form-control">
+                                      <option value="Advance">Advance</option>
+                                      <option value="Part">Part</option>
+                                      <option value="Balance">Balance</option>
+                                  </select>
+                                </div>
+                                <script>
+                                    document.getElementById("type").selectedIndex = -1;
+                                </script>
+                        </div>
+
+                        <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="method">Payment Method</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <select id="method" name="method" class="form-control">
+                                      <option value="Cash">Cash</option>
+                                      <option value="Cheque">Cheque</option>
+                                      <option value="NEFT">NEFT</option>
+                                  </select>
+                                </div>
+                                <script>
+                                    document.getElementById("method").selectedIndex = -1;
+                                </script>
+                        </div>
+
+                        <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="customer_code">Payment Method</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input type="text" id="customer_code" name="customer__customer_code" required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                        </div>
+
+                        <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id">Bill ID</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input type="text" id="id" name="bill__id" required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                        </div>
+
+                        </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="buttonNext btn btn-success" onclick="document.getElementById('filterform').submit();" data-dismiss="modal">Filter</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--End of filtration modal-->
+
+<script>
+$('#spandate').on('DOMSubtreeModified',function(){
+  document.getElementById('date').value = document.getElementById('spandate').innerHTML
+})
+</script>

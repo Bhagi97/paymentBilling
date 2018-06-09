@@ -1,0 +1,47 @@
+{% extends "app/mydir/common/maincontent.html" %}
+{% block content %}
+
+<div class="row">
+<div class="page-title">
+              <div class="title_left" style="padding-left:20px;">
+                <h3>Reports</h3>
+              </div>
+
+                <div class="title_right">
+                                <div class="col-md-3 col-sm-3 col-xs-12 form-group pull-right top_search">
+
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                           <button id="idbtn" class="btn btn-default" onclick="$('#filterModal').modal();">
+                                               <i class="fa fa-filter" aria-hidden="true"></i> Filter
+                                           </button>
+                                        </span>
+
+                                    </div>
+
+                                </div>
+                 </div>
+</div>
+</div>
+
+{% if table_name == "sales" %}
+{% include "app/mydir/includes/apps/reports/report_sales.html" %}
+{% elif table_name == "stock" %}
+{% include "app/mydir/includes/apps/reports/report_stock.html" %}
+{% elif table_name == "implementation" %}
+{% include "app/mydir/includes/apps/reports/report_implementation.html" %}
+{% elif table_name == "inspection" %}
+{% include "app/mydir/includes/apps/reports/report_inspection.html" %}
+{% elif table_name == "receipt" %}
+{% include "app/mydir/includes/apps/reports/report_receipt.html" %}
+{% else %}
+{% include "app/mydir/includes/apps/reports/report_audit.html" %}
+{% endif %}
+<script>
+
+    $(document).ready(function() {
+      $('#datatable').dataTable({bFilter: false, bInfo: false, bLengthChange: false, bSort:false});
+     } );
+
+</script>
+{% endblock %}

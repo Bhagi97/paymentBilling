@@ -1,0 +1,74 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>View Requests</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                        <div id="collapseOne1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                          <div class="panel-body">
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>Franchisee Name</th>
+                                  <th>Item Name</th>
+                                  <th>Quantity Returned</th>
+                                  <th>Reason</th>
+                                  <th>Approve/Reject</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for s in requests %}
+                                <tr>
+                                  <th scope="row">{{s.franchise_name}}</th>
+                                  <td>{{s.item_name}}</td>
+                                  <td>{{s.stock_quantity_returned}}</td>
+                                  <td>{{s.reason}}</td>
+                                  <td>
+                                    <a href="javascript:launchajax('Approved',{{s.id}})" data-toggle="tooltip" title="Approve"><i class="fa fa-check" style="margin-right: 20px;"></i></a>
+                                    <a href="javascript:launchajax('Rejected',{{s.id}})" data-toggle="tooltip" title="Reject"><i class="fa fa-close" style="margin-right: 20px;"></i></a>
+                                  </td>
+                                </tr>
+                              {% endfor %}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+</div>
+</div>
+</div>
+
+<script>
+
+function launchajax(status,id)
+  {
+    $.ajax({
+        url: '/ajax/resolvetransferrequest/',
+        data: {
+          'id': id,
+          'status': status,
+        },
+        dataType: 'json',
+        success: function (data) {
+            if(data.success){
+              document.getElementById('notify2').style.display = 'block';
+              document.getElementById('message').innerHTML = data.message;
+              setTimeout(function() {location.reload();}, 2000);
+            }
+            else{
+              document.getElementById('notify-f2').style.display = 'block';
+              document.getElementById('message-f').innerHTML = data.message;
+            }
+        }
+      });
+  }
+
+
+</script>

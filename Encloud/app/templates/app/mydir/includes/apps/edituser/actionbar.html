@@ -1,0 +1,104 @@
+<div class="actionBar">
+    <a href="javascript:{}" onclick="document.getElementById('addform').submit();" id="finish" class="buttonFinish  btn btn-default" style="display:none;">Finish</a>
+    <a href="#" id="next" class="buttonNext btn btn-success" onclick="loadNext()">Next</a>
+    <a href="#" id="prev" class="buttonPrevious  btn btn-primary" onclick="loadPrev()" style="display:none;">Previous</a>
+</div>
+
+<script type="text/javascript">
+    var count=0;
+</script>
+
+<script>
+    function loadNext() {
+
+      for (i=1;i<=3;i++)
+      if(document.getElementById('step-'.concat(i.toString())).style.display=='block')
+      {
+         document.getElementById('step-'.concat((i).toString())).style.display='none';
+         document.getElementById('step-'.concat((i+1).toString())).style.display='block';
+
+         document.getElementById('button'.concat((i).toString())).className+=" done";
+         document.getElementById('button'.concat((i).toString())).className=document.getElementById('button'.concat((i).toString())).className.replace( /(?:^|\s)selected(?!\S)/g , '' );
+
+         document.getElementById('button'.concat((i+1).toString())).className=document.getElementById('button'.concat((i+1).toString())).className.replace( /(?:^|\s)disabled(?!\S)/g , '' );
+         document.getElementById('button'.concat((i+1).toString())).className+=" selected";
+
+         if (i==1)
+         {
+            document.getElementById("prev").style.display = "inline-block";
+         }
+         if (i==2)
+         {
+
+            document.getElementById("finish").style.display = "inline-block";
+            document.getElementById("next").style.display = "none";
+         }
+
+         break;
+      }
+    }
+
+    function loadPrev() {
+
+      for (i=1;i<=3;i++)
+      if(document.getElementById('step-'.concat(i.toString())).style.display=='block')
+      {
+         document.getElementById('step-'.concat((i).toString())).style.display='none';
+         document.getElementById('step-'.concat((i-1).toString())).style.display='block';
+
+         document.getElementById('button'.concat((i).toString())).className+=" disabled";
+         document.getElementById('button'.concat((i).toString())).className=document.getElementById('button'.concat((i).toString())).className.replace( /(?:^|\s)selected(?!\S)/g , '' );
+
+         document.getElementById('button'.concat((i-1).toString())).className=document.getElementById('button'.concat((i-1).toString())).className.replace( /(?:^|\s)done(?!\S)/g , '' );
+         document.getElementById('button'.concat((i-1).toString())).className+=" selected";
+
+         if (i==2)
+         {
+            document.getElementById("prev").style.display = "none";
+
+         }
+         if (i==3)
+         {
+            document.getElementById("finish").style.display = "none";
+            document.getElementById("next").style.display = "inline-block";
+         }
+
+         break;
+      }
+    }
+
+
+        $(document).on('change','#role',function(){
+            var role = document.getElementById('role').value;
+            var perm = [{key:'Doctor', value:{{perm_template.Doctor}}},
+                {key:'Pharmacist', value:{{perm_template.Pharmacist}}},
+                {key:'Receptionist', value:{{perm_template.Receptionist}}},
+                {key:'Vendor', value:{{perm_template.Vendor}}},
+                {key:'Accounts', value:{{perm_template.Accounts}}},
+                {key:'Admin', value:{{perm_template.Admin}}}];
+            for (var j=0;j<perm.length;j++)
+                {
+                    if(perm[j].key==role)
+                       { perm=perm[j].value;
+                         break;
+                       }
+                }
+            var divs = document.querySelectorAll('#addform input[type="checkbox"]');
+            for (var j=0;j<divs.length;j++)
+                {
+                    if(perm[j]==true)
+                            divs[j].checked=true
+                     else
+                            divs[j].checked=false;
+               }
+
+            var x = document.getElementById('regid-container');
+
+            if(role=='Doctor')
+                x.style.display = 'block';
+            else
+                { document.getElementById('regid').value = 0; x.style.display = 'none'; }
+
+         });
+
+</script>

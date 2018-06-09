@@ -1,0 +1,149 @@
+<div class="panel">
+
+                        <div id="collapseOne1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                          <div class="panel-body">
+                            <table class="table table-striped" id="datatable">
+                              <thead>
+                                <tr>
+                                  <th>Name</th>
+                                  <th>E-Mail</th>
+                                  <th>Phone</th>
+                                  <th>State</th>
+                                  <th>City</th>
+                                  <th>Franchise</th>
+                                  <th>Time requested</th>
+                                  <th>Service/Package requested</th>
+                                  <th>Enquiry Timestamp</th>
+                                  <th>Status</th>
+                                  <th>Last changed</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for s in enquiry %}
+                                <tr>
+                                  <th scope="row">{{s.name}}</th>
+                                  <td scope="row">{{s.email}}</td>
+                                  <td scope="row">{{s.phone}}</td>
+                                  <td scope="row">{{s.state}}</td>
+                                  <td scope="row">{{s.city}}</td>
+                                  <th scope="row">{{s.franchise.franchise_name}}</th>
+                                  <td scope="row">{{s.time}}</td>
+                                  {% if s.s %}
+                                    <td scope="row">{{s.s.name}}</td>
+                                  {% else %}
+                                    <td scope="row">{{s.p.name}}</td>
+                                  {% endif%}
+                                  <th scope="row">{{s.timestamp}}</th>
+                                  <th scope="row">{{s.status}}</th>
+                                  <td scope="row"> {{s.lastchanged}} </td>
+                                </tr>
+                              {% endfor %}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        {% include "app/mydir/includes/apps/reports/actionbar.html" %}
+</div>
+
+<!-- Modal to ask filtration criteria -->
+<div id="filterModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Enter filtration criteria</h4>
+      </div>
+      <div class="modal-body" style="">
+        <div class="form-group">
+                        <form id="filterform" action="enquiry_report.html" method="post" class="form-horizontal form-label-left"> {% csrf_token %}
+
+                            <div class="form-group" id="date_container">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="date_container">Date Range</label>
+                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                    <div>
+                                        <div id="reportrange_right" class="pull-left" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                                          <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                                          <span id="spandate">December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                                        </div>
+                                        <input type="text" id="date" name="date" class="form-control col-md-7 col-xs-12" style="display:none;">
+                                    </div>
+                                </div>
+                        </div>
+
+                        {% if permissions.add_franchise %}
+                        {% if franchise_list %}
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="franchise">Franchise</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select id="franchise" name="franchise_code" class="form-control">
+                              {% for f in franchise_list %}
+                                <option value="{{f.id}}">{{f.franchise_name}}</option>
+                              {% endfor %}
+                            </select>
+                            </div>
+                        </div>
+                        <script>
+                              document.getElementById("sales_base.franchise").selectedIndex = -1;
+                        </script>
+                        {% endif %}
+                        {% endif %}
+
+                        <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input type="text" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                        </div>
+
+                        <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone">Phone</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input type="text" id="phone" name="phone" required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="service_name">Service Name</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select id="service_name" name="service_name" class="form-control">
+                              {% for p in service_list %}
+                                <option value="{{p.id}}">{{p.name}}</option>
+                              {% endfor %}
+                            </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="package_name">Package Name</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select id="package_name" name="package_name" class="form-control">
+                              {% for p in package_list %}
+                                <option value="{{p.id}}">{{p.name}}</option>
+                              {% endfor %}
+                            </select>
+                            </div>
+                        </div>
+                        <script>
+                              document.getElementById("service_name").selectedIndex = -1;
+                              document.getElementById("package_name").selectedIndex = -1;
+                        </script>
+                        </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="buttonNext btn btn-success" onclick="document.getElementById('filterform').submit();" data-dismiss="modal">Filter</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--End of filtration modal-->
+
+<script>
+$('#spandate').on('DOMSubtreeModified',function(){
+  document.getElementById('date').value = document.getElementById('spandate').innerHTML
+})
+</script>

@@ -1,0 +1,85 @@
+<div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Edit Profile </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+
+                    <form id="editprofie" method="post" enctype="multipart/form-data" action="editprofile.html" data-parsley-validate class="form-horizontal form-label-left"> {% csrf_token %}
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="logo">Upload Logo
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="file" name="logo" id="logo" required="required" class="col-md-12 col-xs-12">
+                                <output id="filesInfo"></output>
+                            </div>
+                        </div>
+                          <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_name">Company Name <span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="company_name" name="company_name" required="required" class="form-control col-md-7 col-xs-12">
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username <span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="username" name="username" required="required" class="form-control col-md-7 col-xs-12">
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <button class="btn btn-primary" type="button">Cancel</button>
+						        <button class="btn btn-primary" type="reset">Reset</button>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                              </div>
+                          </div>
+                      </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+<script>
+function fileSelect(evt) {
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+        var files = evt.target.files;
+
+        var result = '';
+        var file;
+        for (var i = 0; file = files[i]; i++) {
+            // if the file is not an image, continue
+            if (!file.type.match('image.*')) {
+                continue;
+            }
+
+            reader = new FileReader();
+            reader.onload = (function (tFile) {
+                return function (evt) {
+                    var div = document.createElement('div');
+                    div.innerHTML = '<img style="margin: 10px; width: 200px;" src="' + evt.target.result + '" />';
+                    document.getElementById('filesInfo').appendChild(div);
+                };
+            }(file));
+            reader.readAsDataURL(file);
+        }
+    } else {
+        alert('The File APIs are not fully supported in this browser.');
+    }
+}
+
+document.getElementById('logo').addEventListener('change', fileSelect, false);
+</script>

@@ -1,0 +1,50 @@
+{% if permissions.add_salesreport or permissions.add_stockreport or permissions.add_patientreport or permissions.add_doctorreport or permissions.add_auditreport or permissions.add_baditemreport %}
+<div>
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2> Reports </h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                  <p>View complete reports merging accounts of all franchises.</p>
+                  <ul class="nav nav-pills" role="tablist">
+                    <li role="presentation"><a href="report_sales.html">Sales Report</a>
+                    </li>
+                      <li role="presentation"><a href="report_stock.html">Stock Report</a>
+                    </li>
+                      <li role="presentation"><a href="report_audit.html">Audit Report</a>
+                    </li>
+                    <li role="presentation" class="dropdown">
+                      <a id="drop4" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                                  Dropdown
+                                  <span class="caret"></span>
+                              </a>
+                      <ul id="menu6" class="dropdown-menu animated fadeInDown" role="menu">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="doctor_details.html">Doctors</a>
+                        </li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="patient_details.html">Patients</a>
+                        </li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="enquiry_report.html">Enquiry Report</a>
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        {% if permissions.add_franchise %}
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="report_implementation.html">Franchisee Implementation Report</a>
+                        </li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="report_inspection.html">Franchisee Inspection Report</a>
+                        </li>
+                        {% endif %}
+                      </ul>
+                    </li>
+                  </ul>
+
+                </div>
+              </div>
+</div>
+{% endif %}

@@ -1,0 +1,14 @@
+{% extends "app/mydir/common/maincontent.html" %}
+{% block content %}
+
+{% include "app/mydir/includes/apps/dashboard/stattiles.html" %}
+{% include "app/mydir/includes/apps/dashboard/graph.html" %}
+
+<div class="row">
+{% include "app/mydir/includes/apps/dashboard/DonutGraph.html" %}
+{% include "app/mydir/includes/apps/dashboard/HorizontalBarGraph.html" %}
+{% include "app/mydir/includes/apps/dashboard/Spdomtr.html" %}
+</div>
+
+
+{% endblock %}

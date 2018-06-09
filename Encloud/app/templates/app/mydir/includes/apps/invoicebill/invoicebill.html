@@ -1,0 +1,854 @@
+<div class="page-title col-md-12 col-sm-12 col-xs-12">
+                            <div class="title_left">
+                                  <h3 style="margin-left:20px;">Invoice Bill</h3>
+                            </div>
+
+                            <div class="title_right">
+                                <div class="col-md-7 col-sm-7 col-xs-12 form-group pull-right top_search">
+
+                                    <div class="input-group">
+                                        <input class="form-control" name="c" id="c" placeholder="Company Name" type="text" >
+                                        <span class="input-group-btn">
+                                        </span>
+                                        <input class="form-control" name="q" id="q" placeholder="Patient ID" type="text" >
+                                        <span class="input-group-btn">
+                                           <button id="idbtn" class="btn btn-default">Go!</button>
+                                        </span>
+
+                                    </div>
+
+                                </div>
+                             </div>
+
+</div>
+
+
+<div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+
+              <div class="x_title">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <h2> Categories </h2>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <ul class="nav navbar-right panel_toolbox">
+                    <div class="title_right">
+                      <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search" style="margin-bottom: 0px">
+                        <div class="input-group">
+                            <input class="form-control" name="q_category" id="q_category" placeholder="Enter Category here" type="text" >
+                            <span class="input-group-btn">
+                               <button id="q_category_button" class="btn btn-default">&nbsp;</button>
+                            </span>
+                        </div>
+                      </div>
+                    </div>
+                  </ul>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+
+              <div class="x_content" style="overflow-y:scroll; height:150px;">
+                <button class="btn btn-default source catbtn" >Services</button>
+                <button class="btn btn-default source catbtn" >Packages</button>
+                <button class="btn btn-default source catbtn" >Treatments</button>
+                <button class="btn btn-default source catbtn" >Miscellaneous</button>
+                <button onclick="showdiscountmodal()" class="btn btn-default source" >Discount</button>
+              </div>
+
+
+             </div>
+</div>
+
+
+<div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+
+              <div class="x_title">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <h2 id="title">Services</h2>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <ul class="nav navbar-right panel_toolbox">
+                    <div class="title_right">
+                      <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search" style="margin-bottom: 0px">
+                        <div class="input-group">
+                            <input class="form-control" name="q_product" id="q_product" placeholder="Enter Services here" type="text" >
+                            <span class="input-group-btn">
+                               <button id="q_product_button" class="btn btn-default">&nbsp;</button>
+                            </span>
+                        </div>
+                      </div>
+                    </div>
+                  </ul>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+
+              <div id="productdiv" class="x_content" style="overflow-y:scroll; height:150px;">
+
+              </div>
+
+             </div>
+</div>
+
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2> Bill </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="x_content" style="overflow-y:scroll; height:330px;">
+                    <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>Medicine Name</th>
+                                  <th>Rate</th>
+                                  <th>Duration</th>
+                                  <th>Cancel</th>
+                                </tr>
+                              </thead>
+                              <tbody id="billbody">
+                              </tbody>
+                    </table>
+                  </div>
+
+
+
+                 </div>
+
+
+
+                <div class="actionBar" style="margin-bottom:20px;">
+                    <a disabled id="totalamt" class="buttonPrevious btn" >Total : 0</a>
+                    <a disabled id="totaldiscount" class="buttonPrevious btn" style="display:none">Discount : 0</a>
+                    <a href="#" onclick="clearbill()" class="buttonPrevious btn btn-primary" >Clear</a>
+                    <a href="#" class="btn btn-default" onclick="savebill()">Save Bill</a>
+                    <a href="#" class="buttonNext btn btn-success" onclick="findreceipts(0)">Print Bill</a>
+                    <a href="#" class="buttonNext btn btn-success" onclick="findreceipts(1)">Print Bill (To Company)</a>
+
+                </div>
+</div>
+
+<!-- Modal to print -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Final Bill</h4>
+      </div>
+      <div class="modal-body" style="height:70vh;">
+        <img style="position:absolute; top:50%; left:50%; max-height:90%;max-width:80%;-webkit-transform: translate(-50%, -50%);display:block;" id="bill_img">
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="buttonNext btn btn-success" onclick="printImg('/media/bill/invoice2.jpg')">Print Bill</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href=location.href.slice(0,-1)">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--End of print modal-->
+
+<!-- No stock modal-->
+<div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">The following items are out of stock</h4>
+      </div>
+      <div class="modal-body">
+                <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>Item Name</th>
+                                  <th>Status</th>
+                                </tr>
+                              </thead>
+                              <tbody id="myModal2_body">
+                              </tbody>
+                </table>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="buttonNext btn btn-success" onclick="printBillAnyway()" data-dismiss="modal">Print Bill Anyway</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--End of no stock modal-->
+
+<!-- Modal to ask extra charge -->
+<div id="ecModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+  </div>
+</div>
+<!--End of extra charge modal-->
+
+<!-- Receipt modal-->
+<div id="receiptModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Advance payments made</h4>
+      </div>
+      <div class="modal-body">
+                <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th style="display: none">ID</th>
+                                  <th>Amount</th>
+                                  <th>Date</th>
+                                  <th>Apply</th>
+                                </tr>
+                              </thead>
+                              <tbody id="receiptModal_body">
+                              </tbody>
+                </table>
+                <!--Receipt-->
+                <form>
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="amount">Amount <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="number" step="any" min="0" id="amount" name="amount" required="required" class="form-control col-md-7 col-xs-12">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="type">Payment type<span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <select id="type" name="type" class="form-control">
+                        <option value="Advance">Advance</option>
+                        <option value="Part">Part</option>
+                        <option value="Balance">Balance</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="method">Payment method <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <select id="method" name="method" class="form-control">
+                        <option value="Cash">Cash</option>
+                        <option value="Cheque">Cheque</option>
+                        <option value="Credit/Debit Card">Credit/Debit Card</option>
+                        <option value="NEFT">NEFT</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="amount">Payment Details
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="details" name="details" class="form-control col-md-7 col-xs-12">
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12" id="cheque" style="display:none;">
+                      <input type="text" id="bankname" name="bankname" placeholder="Bank Name" class="form-control col-md-7 col-xs-12">
+                      <input type="text" id="accountholder" name="accountholder" placeholder="Account Holder Name" class="form-control col-md-7 col-xs-12">
+                      <input type="text" id="accountno" name="accountno" placeholder="Account No." class="form-control col-md-7 col-xs-12">
+                      <input type="text" id="chequeno" name="chequeno" placeholder="Cheque No." class="form-control col-md-7 col-xs-12">
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12" id="cdcard" style="display:none;">
+                      <input type="text" id="cd_name" name="neft_name" placeholder="Name" class="form-control col-md-7 col-xs-12">
+                      <input type="text" id="cd_cardno" name="cd_cardno" placeholder="Card No" class="form-control col-md-7 col-xs-12">
+                      <input type="text" id="cd_ed" name="cd_ed " placeholder="Expiry Date" class="form-control col-md-7 col-xs-12">
+                      <input type="text" id="cd_rno" name="cd_rno" placeholder="Receipt No" class="form-control col-md-7 col-xs-12">
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12" id="neft" style="display:none;">
+                      <input type="text" id="neft_name" name="neft_name" placeholder="Name" class="form-control col-md-7 col-xs-12">
+                      <input type="text" id="neft_bankname" name="neft_bankname" placeholder="Bank Name" class="form-control col-md-7 col-xs-12">
+                      <input type="text" id="neft_accountno" name="neft_accountno" placeholder="Account No" class="form-control col-md-7 col-xs-12">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="single_cal1"></label>
+                    <div class="col-md-6 col-sm-6 col-xs-12" id="date" style="display:none;">
+                      <div class="daterangepicker dropdown-menu ltr single opensright show-calendar picker_1 xdisplay"><div class="calendar left single" style="display: block;"><div class="daterangepicker_input"><input class="input-mini form-control active" type="text" name="daterangepicker_start" value="" style="display: none;"><i class="fa fa-calendar glyphicon glyphicon-calendar" style="display: none;"></i><div class="calendar-time" style="display: none;"><div></div><i class="fa fa-clock-o glyphicon glyphicon-time"></i></div></div><div class="calendar-table"><table class="table-condensed"><thead><tr><th class="prev available"><i class="fa fa-chevron-left glyphicon glyphicon-chevron-left"></i></th><th colspan="5" class="month">Oct 2016</th><th class="next available"><i class="fa fa-chevron-right glyphicon glyphicon-chevron-right"></i></th></tr><tr><th>Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th></tr></thead><tbody><tr><td class="weekend off available" data-title="r0c0">25</td><td class="off available" data-title="r0c1">26</td><td class="off available" data-title="r0c2">27</td><td class="off available" data-title="r0c3">28</td><td class="off available" data-title="r0c4">29</td><td class="off available" data-title="r0c5">30</td><td class="weekend available" data-title="r0c6">1</td></tr><tr><td class="weekend available" data-title="r1c0">2</td><td class="available" data-title="r1c1">3</td><td class="available" data-title="r1c2">4</td><td class="available" data-title="r1c3">5</td><td class="available" data-title="r1c4">6</td><td class="available" data-title="r1c5">7</td><td class="weekend available" data-title="r1c6">8</td></tr><tr><td class="weekend available" data-title="r2c0">9</td><td class="available" data-title="r2c1">10</td><td class="available" data-title="r2c2">11</td><td class="available" data-title="r2c3">12</td><td class="available" data-title="r2c4">13</td><td class="available" data-title="r2c5">14</td><td class="weekend available" data-title="r2c6">15</td></tr><tr><td class="weekend available" data-title="r3c0">16</td><td class="available" data-title="r3c1">17</td><td class="today active start-date active end-date available" data-title="r3c2">18</td><td class="available" data-title="r3c3">19</td><td class="available" data-title="r3c4">20</td><td class="available" data-title="r3c5">21</td><td class="weekend available" data-title="r3c6">22</td></tr><tr><td class="weekend available" data-title="r4c0">23</td><td class="available" data-title="r4c1">24</td><td class="available" data-title="r4c2">25</td><td class="available" data-title="r4c3">26</td><td class="available" data-title="r4c4">27</td><td class="available" data-title="r4c5">28</td><td class="weekend available" data-title="r4c6">29</td></tr><tr><td class="weekend available" data-title="r5c0">30</td><td class="available" data-title="r5c1">31</td><td class="off available" data-title="r5c2">1</td><td class="off available" data-title="r5c3">2</td><td class="off available" data-title="r5c4">3</td><td class="off available" data-title="r5c5">4</td><td class="weekend off available" data-title="r5c6">5</td></tr></tbody></table></div></div><div class="calendar right" style="display: none;"><div class="daterangepicker_input"><input class="input-mini form-control" type="text" name="daterangepicker_end" value="" style="display: none;"><i class="fa fa-calendar glyphicon glyphicon-calendar" style="display: none;"></i><div class="calendar-time" style="display: none;"><div></div><i class="fa fa-clock-o glyphicon glyphicon-time"></i></div></div><div class="calendar-table"><table class="table-condensed"><thead><tr><th></th><th colspan="5" class="month">Nov 2016</th><th class="next available"><i class="fa fa-chevron-right glyphicon glyphicon-chevron-right"></i></th></tr><tr><th>Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th></tr></thead><tbody><tr><td class="weekend off available" data-title="r0c0">30</td><td class="off available" data-title="r0c1">31</td><td class="available" data-title="r0c2">1</td><td class="available" data-title="r0c3">2</td><td class="available" data-title="r0c4">3</td><td class="available" data-title="r0c5">4</td><td class="weekend available" data-title="r0c6">5</td></tr><tr><td class="weekend available" data-title="r1c0">6</td><td class="available" data-title="r1c1">7</td><td class="available" data-title="r1c2">8</td><td class="available" data-title="r1c3">9</td><td class="available" data-title="r1c4">10</td><td class="available" data-title="r1c5">11</td><td class="weekend available" data-title="r1c6">12</td></tr><tr><td class="weekend available" data-title="r2c0">13</td><td class="available" data-title="r2c1">14</td><td class="available" data-title="r2c2">15</td><td class="available" data-title="r2c3">16</td><td class="available" data-title="r2c4">17</td><td class="available" data-title="r2c5">18</td><td class="weekend available" data-title="r2c6">19</td></tr><tr><td class="weekend available" data-title="r3c0">20</td><td class="available" data-title="r3c1">21</td><td class="available" data-title="r3c2">22</td><td class="available" data-title="r3c3">23</td><td class="available" data-title="r3c4">24</td><td class="available" data-title="r3c5">25</td><td class="weekend available" data-title="r3c6">26</td></tr><tr><td class="weekend available" data-title="r4c0">27</td><td class="available" data-title="r4c1">28</td><td class="available" data-title="r4c2">29</td><td class="available" data-title="r4c3">30</td><td class="off available" data-title="r4c4">1</td><td class="off available" data-title="r4c5">2</td><td class="weekend off available" data-title="r4c6">3</td></tr><tr><td class="weekend off available" data-title="r5c0">4</td><td class="off available" data-title="r5c1">5</td><td class="off available" data-title="r5c2">6</td><td class="off available" data-title="r5c3">7</td><td class="off available" data-title="r5c4">8</td><td class="off available" data-title="r5c5">9</td><td class="weekend off available" data-title="r5c6">10</td></tr></tbody></table></div></div><div class="ranges" style="display: none;"><div class="range_inputs"><button class="applyBtn btn btn-sm btn-success" type="button">Apply</button> <button class="cancelBtn btn btn-sm btn-default" type="button">Cancel</button></div></div></div>
+                        <fieldset>
+                          <div class="control-group">
+                            <div class="controls">
+                              <div class="col-md-11 xdisplay_inputx form-group has-feedback">
+                                <input type="text" value="" class="form-control has-feedback-left" id="single_cal1" name="dated" placeholder="Date" aria-describedby="inputSuccess2Status">
+                                <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                                <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+                  </div>
+
+                </form>
+                <!--End of Receipt-->
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="buttonNext btn btn-success" id="cflag_propogate" onclick="printbill(0)" data-dismiss="modal">Print Bill</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--End of receipt modal-->
+
+
+{% include "app/mydir/common/verificationmodal.html" %}
+
+
+<script>
+
+    var discount = 0;
+    var discount_type = '';
+    var total = 0;
+
+    function addcount(o){
+      ele = o.parentNode.getElementsByTagName('input')[0];
+      ele.value = parseInt(ele.value)+1;
+    }
+
+    function subcount(o){
+      ele = o.parentNode.getElementsByTagName('input')[0];
+      if (ele.value>1)
+        ele.value = parseInt(ele.value)-1;
+    }
+
+    function delrow(o){
+      ele = o.parentNode.parentNode;
+      var myNode = document.getElementById("billbody");
+      var children = myNode.children;
+      for (var i = 0; children[i] != ele; i++) {}
+      var rate = children[i].getElementsByTagName('td')[1].innerHTML.split(/[";]+/);
+      rate = rate[rate.length-1];
+      myNode.removeChild(children[i]);
+      for (; i < children.length; i++) {
+        e = children[i].getElementsByTagName('th')[0];
+        e.innerHTML = parseInt(e.innerHTML)-1;
+      }
+      let total_ele = document.getElementById("totalamt");
+      total-=parseInt(rate);
+      let amtwithdiscount;
+      if (discount!==0)
+          if (discount_type==='%')
+            amtwithdiscount=Math.round((total)*(1-discount/100));
+          else
+              amtwithdiscount=total-discount;
+      else
+          amtwithdiscount = total;
+      total_ele.innerHTML = "Total : "+String(amtwithdiscount);
+    }
+
+    function clearbill(){
+      var myNode = document.getElementById("billbody");
+      while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+      }
+    }
+
+    function printImg() {
+      var url = document.getElementById("bill_img").src;
+      url = url.slice(0,-4);
+      url = url+'.pdf';
+      window.open(url, '_blank', 'fullscreen=yes');
+    }
+
+    function findreceipts(company_flag) {
+        var pid = document.getElementById("q").value;
+        if(pid==''){alert('Enter ID');return;}
+        $.ajax({
+            url: '/ajax/getreceipts/',
+            data: {
+              'id': pid,
+            },
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                var body = "";
+                if (data.success==1){
+                        for (var j = 0; j < data['receipts'].length; j++) {
+                            var s = '<tr> \
+                            <th scope="row">'+String(j+1)+'</th> \
+                            <td style="display: none">'+data['receipts'][j].id+'</td> \
+                            <td id="amt'+String(j+1)+'">'+data['receipts'][j].amount+'</td> \
+                            <td>'+data['receipts'][j].date+'</td> \
+                            <td><input id="rec'+String(j+1)+'" name="rec'+String(j+1)+'" class="flat" type="checkbox" checked="checked"></td> \
+                            </tr>';
+                            body = body+s;
+                        }
+                        document.getElementById('receiptModal_body').innerHTML = body;
+                        r = document.getElementById('receiptModal_body').children;
+                        total=0;
+                        for(i=0;i<r.length;i++)
+                            { total+=parseFloat(r[i].children[2].innerHTML); }
+                        bill_amt = parseFloat(document.getElementById("totalamt").innerHTML.split(": ")[1]);
+                        $('#receiptModal_body :input').change(adjustamount);
+                        document.getElementById('amount').value = bill_amt - total;
+                        document.getElementById('type').value = "Balance";
+                        document.getElementById('cflag_propogate').onclick= function () { printbill(company_flag); };
+                        $("#receiptModal").modal();
+                }
+                else {
+                    alert("Failed to find customer");
+                }
+
+            }
+          });
+    }
+
+    var doctor='';
+    function printbill(company_flag){
+      productlist = [];
+      rlist = [];
+      dlist = [];
+      receiptlist = [];
+      metalist = [];
+      metalist.push(document.getElementById("q").value);
+      metalist.push(document.getElementById("c").value);
+      metalist.push(company_flag);
+      metalist.push(doctor);
+      metalist.push(discount_type);
+      metalist.push(discount);
+      var children = document.getElementById("billbody").children;
+      for (var i = 0; i < children.length; i++) {
+        productlist.push(children[i].getElementsByTagName('td')[0].innerHTML);
+        rlist.push(children[i].getElementsByTagName('td')[1].innerHTML);
+        if (children[i].getElementsByTagName('td')[2].innerHTML=='')
+            dlist.push('');
+        else
+            dlist.push(children[i].getElementsByTagName('td')[2].getElementsByTagName('input')[0].value);
+      }
+      //Get receipts to be linked
+      receipts = document.getElementById('receiptModal_body').children
+      for (i =0; i<receipts.length; i++)
+          if (receipts[i].children[4].children[0].checked == true)
+              receiptlist.push(receipts[i].children[1].innerHTML);
+      //Get receipt data
+      var robj = getreceiptdata();
+      $.ajax({
+        url: '/ajax/printinvoice/',
+        data: {
+          'productlist': productlist,
+          'ratelist': rlist,
+          'receiptlist': receiptlist,
+          'durationlist': dlist,
+          'metalist': metalist,
+          'robj': JSON.stringify(robj),
+        },
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+            document.getElementById("bill_img").src="/media/bill/"+data.filename+".jpg";
+            var body = "";
+            $("#myModal").modal();
+            window.open("/media/bill/"+data.receipt_filename+".jpg", '_blank', 'fullscreen=yes');
+        }
+      });
+    }
+
+    function savebill(){
+
+      productlist = [];
+      rlist = [];
+      dlist = [];
+      metalist = [];
+      metalist.push(document.getElementById("q").value);
+      metalist.push(doctor);
+      var children = document.getElementById("billbody").children;
+      for (var i = 0; i < children.length; i++) {
+        productlist.push(children[i].getElementsByTagName('td')[0].innerHTML);
+        rlist.push(children[i].getElementsByTagName('td')[1].innerHTML);
+        dlist.push(children[i].getElementsByTagName('td')[2].innerHTML);
+      }
+      $.ajax({
+        url: '/ajax/savebill/',
+        data: {
+          'productlist': productlist,
+          'ratelist': rlist,
+          'metalist': metalist,
+          'durationlist': dlist
+        },
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+            if (data['success']==1)
+            {   document.getElementById('notify2').style.display = 'block';
+                document.getElementById('message').innerHTML = 'Bill Saved';
+            }
+            else if (data['success']==0)
+            {   document.getElementById('notify-f2').style.display = 'block';
+                document.getElementById('message-f').innerHTML = 'Bill could not be saved';
+            }
+        }
+      });
+    }
+
+    function printBillAnyway(){
+        $("#myModal").modal();
+    }
+
+    function selformat(opt){
+        return '<option value="'+opt+'">'+opt+'</option>';
+    }
+
+
+    function addtobill(product,rate,val){
+      if(rate.indexOf('-')==0)
+      {
+          let miscitems = ['Consultation Fee', 'Extra Charges','Yoga','Meditation','Bed Charges','Registration Fee','Clinical Support Services','Consumables','Food and Beverages','Room Rent'];
+          for(i=0;i<miscitems.length;i++)
+          {
+              if(product==miscitems[i])
+                {
+                  var html = '<!-- Modal content--> \
+                                <div class="modal-content"> \
+                                  <div class="modal-header"> \
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button> \
+                                    <h4 class="modal-title">Enter extra charge</h4> \
+                                  </div> \
+                                  <div class="modal-body" style="height:30vh;"> \
+                                    <div class="form-group"> \
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ec">'+miscitems[i]+' <span class="required">*</span> \
+                                                    </label> \
+                                                    <div class="col-md-6 col-sm-6 col-xs-12"> \
+                                                      <input type="text" id="ec" name="ec" required="required" class="form-control col-md-7 col-xs-12"> \
+                                                    </div> \
+                                                  </div> \
+                                  </div> \
+                                  <div class="modal-footer"> \
+                                      <button type="button" class="buttonNext btn btn-success" onclick="applyrate(\''+miscitems[i]+'\')" data-dismiss="modal">Apply</button> \
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> \
+                                  </div> \
+                                </div> \
+                    ';
+                  document.getElementById("ecModal").innerHTML = html
+                  $("#ecModal").modal();
+                  return;
+                }
+          }
+      }
+      if (val === undefined)
+        val='1';
+      var myNode = document.getElementById("billbody");
+      var container = document.createElement("tr");
+      var children = myNode.children;
+      container.id = String(myNode.childElementCount+1);
+      var duration_if_required;
+      if(document.getElementById('title').innerHTML == 'Treatments')
+        duration_if_required = '<input style="width: 35px;height: 25px;margin-right:5px;" type="text" value="" >';
+      else
+        duration_if_required = '';
+      var myrate = rate;
+      if (myrate.includes(','))
+      {
+          const rates = rate.split(',');
+          myrate = '<i class="fa fa-arrow-circle-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;' +
+              '<strike>'+rates[0]+'</strike>&nbsp;&nbsp;&nbsp;&nbsp;'+rates[1];
+      }
+      container.innerHTML = '<th scope="row">'+String(myNode.childElementCount+1)+'</th> \
+                                      <td>'+product+'</td> \
+                                      <td>'+myrate+'</td> \
+                                      <td>'+duration_if_required+'</td> \
+                                      <td> \
+                                        <a href="#" onclick="delrow(this)"> <i class="fa fa-times" aria-hidden="true"></i> </a> \
+                                      </td>'
+
+      myNode.appendChild(container);
+
+      myrate = myrate.split(/[";]+/);
+      myrate = myrate[myrate.length-1];
+
+      let total_ele = document.getElementById("totalamt");
+      total+=parseInt(myrate);
+      let amtwithdiscount;
+      if (discount!==0)
+          if (discount_type==='%')
+            amtwithdiscount=Math.round((total)*(1-discount/100));
+          else
+              amtwithdiscount=total-discount;
+      else
+          amtwithdiscount = total;
+      total_ele.innerHTML = "Total : "+String(amtwithdiscount);
+
+    }
+
+  $(document).ready(function(){
+
+    const cbs = document.getElementsByClassName('catbtn');
+    const categories = [];
+    for (var i =0; i< cbs.length; i++) categories.push(cbs[i].innerHTML);
+    var pbs = null;
+    var products = [];
+
+    $(".catbtn").click(function () {
+      var category= $(this).text();
+      document.getElementById('title').innerHTML = $(this).text();
+      document.getElementById('q_product').placeholder = 'Enter '+$(this).text()+' here';
+      $.ajax({
+        url: '/ajax/get_products/',
+        data: {
+          'category': category
+        },
+        dataType: 'json',
+        success: function (data) {
+          var myNode = document.getElementById("productdiv");
+          while (myNode.firstChild) {
+            myNode.removeChild(myNode.firstChild);
+          }
+          if(data.type=="product")
+          {    for (var i = 0; i < data.products.length; i++ ) {
+                  var container = document.createElement("button");
+                  container.className += "btn btn-default source pbtn"
+                  container.innerHTML = data.products[i].item_name;
+                  container.dataset.rate = String(data.products[i].MRP);
+                  container.onclick = function(){ addtobill($(this).text(),this.dataset.rate); };
+                  myNode.appendChild(container)
+               }
+          }
+          else
+          {
+              for (var i = 0; i < data.products.length; i++ ) {
+                      var container = document.createElement("button");
+                      container.className += "btn btn-default source pbtn";
+                      container.innerHTML = data.products[i].name;
+                      container.dataset.rate = String(data.products[i].rates);
+                      container.onclick = function(){ addtobill($(this).text(),this.dataset.rate); };
+                      myNode.appendChild(container)
+              }
+          }
+          pbs = document.getElementsByClassName('pbtn');
+          products = [];
+          for (var i =0; i< pbs.length; i++) products.push(pbs[i].innerHTML);
+
+        }
+      });
+    });
+
+    $("#idbtn").click(function () {
+      id = [];
+      id.push(document.getElementById('q').value);
+
+      $.ajax({
+        url: '/ajax/getsavedbill/',
+        data: {
+          'ID': id
+        },
+        dataType: 'json',
+        success: function (data) {
+            if (data['success']==1)
+            {   document.getElementById('notify2').style.display = 'block';
+                document.getElementById('message').innerHTML = 'ID found';
+                doctor = data.doctor;
+            }
+            else if (data['success']==2)
+            {   document.getElementById('customercode').value = id[0];
+                $("#verificationModal").modal();
+
+            }
+            else
+            {   document.getElementById('notify-f2').style.display = 'block';
+                document.getElementById('message-f').innerHTML = 'ID not found';
+            }
+            for ( var i = 0; i < data['ratelist'].length; i++) {
+                addtobill(data['productlist'][i],data['ratelist'][i],1)
+            }
+        }
+      });
+    });
+
+    $('#q_category').keyup(function () {
+       var search = document.getElementById('q_category').value;
+       for (var i =0; i< cbs.length; i++)
+           if (categories[i].toLowerCase().indexOf(search.toLowerCase())>-1)
+                cbs[i].style.display='';
+           else
+               cbs[i].style.display='none';
+    });
+
+    $('#q_product').keyup(function () {
+       var search = document.getElementById('q_product').value;
+       for (var i =0; i< pbs.length; i++)
+           if (products[i].toLowerCase().indexOf(search.toLowerCase())>-1)
+                pbs[i].style.display='';
+           else
+               pbs[i].style.display='none';
+    });
+
+    function getSearchParameters() {
+      var prmstr = window.location.search.substr(1);
+      return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+    }
+
+    function transformToAssocArray( prmstr ) {
+        var params = {};
+        var prmarr = prmstr.split("&");
+        for ( var i = 0; i < prmarr.length; i++) {
+            var tmparr = prmarr[i].split("=");
+            params[tmparr[0]] = tmparr[1];
+        }
+        return params;
+    }
+
+    var params = getSearchParameters();
+    for (i=0; i<(Object.keys(params).length-2)/3; i++){
+        si=i.toString();
+        var product = params["p"+si].replace(/%20/g, " ");
+        var quantity = params["q"+si].replace(/%20/g, " ");
+        var rate = params["r"+si];
+        addtobill(product,rate,quantity);
+    }
+    if(Object.keys(params).length>0)
+        { document.getElementById('q').value = params["id"]; doctor = params["doctor"];  }
+
+    $("#method").change(function () {
+        if ($(this).val() == "Cash") {
+            document.getElementById('details').style.display = 'block';
+            document.getElementById('cheque').style.display = 'none';
+            document.getElementById('date').style.display = 'none';
+            document.getElementById('neft').style.display = 'none';
+            document.getElementById('cdcard').style.display = 'none';
+        }
+        else if ($(this).val() == "Cheque") {
+            document.getElementById('details').style.display = 'none';
+            document.getElementById('cheque').style.display = 'block';
+            document.getElementById('date').style.display = 'block';
+            document.getElementById('neft').style.display = 'none';
+            document.getElementById('cdcard').style.display = 'none';
+        }
+        else if ($(this).val() == "Credit/Debit Card") {
+            document.getElementById('details').style.display = 'none';
+            document.getElementById('cheque').style.display = 'none';
+            document.getElementById('date').style.display = 'none';
+            document.getElementById('neft').style.display = 'none';
+            document.getElementById('cdcard').style.display = 'block';
+        }
+        else {
+            document.getElementById('details').style.display = 'none';
+            document.getElementById('cheque').style.display = 'none';
+            document.getElementById('date').style.display = 'none';
+            document.getElementById('neft').style.display = 'block';
+            document.getElementById('cdcard').style.display = 'none';
+        }
+    });
+
+  });
+
+    function adjustamount(){
+        if(this.checked) { document.getElementById('amount').value = parseFloat(document.getElementById('amount').value) - parseFloat(document.getElementById('amt'+this.id.slice(3)).innerHTML);  }
+        else { document.getElementById('amount').value = parseFloat(document.getElementById('amount').value) + parseFloat(document.getElementById('amt'+this.id.slice(3)).innerHTML); }
+    }
+
+    function applyrate(miscitemname){
+    var rate = document.getElementById('ec').value;
+    addtobill(miscitemname,rate,1);
+  }
+
+  function getreceiptdata(){
+    var receipt = new Object();
+    receipt.amount = document.getElementById('amount').value;
+    receipt.type = document.getElementById('type').value;
+    receipt.method = document.getElementById('method').value;
+    receipt.details = document.getElementById('details').value;
+    receipt.bankname = document.getElementById('bankname').value;
+    receipt.accountholder = document.getElementById('accountholder').value;
+    receipt.accountno = document.getElementById('accountno').value;
+    receipt.chequeno = document.getElementById('chequeno').value;
+    receipt.dated = document.getElementById('single_cal1').value;
+    receipt.neft_name = document.getElementById('neft_name').value;
+    receipt.neft_bankname = document.getElementById('neft_bankname').value;
+    receipt.neft_accountno = document.getElementById('neft_accountno').value;
+    receipt.cd_name = document.getElementById('cd_name').value;
+    receipt.cd_ed = document.getElementById('cd_ed').value;
+    receipt.cd_cardno = document.getElementById('cd_cardno').value;
+    receipt.cd_rno = document.getElementById('cd_rno').value;
+    return receipt;
+  }
+
+  function showdiscountmodal(){
+        const html = '<!-- Modal content--> \
+                                <div class="modal-content"> \
+                                  <div class="modal-header"> \
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button> \
+                                    <h4 class="modal-title">Enter Discount (%)</h4> \
+                                  </div> \
+                                  <div class="modal-body" style="height:30vh;"> \
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12" > \
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ec"> Type <span class="required">*</span> \
+                                                    </label> \
+                                                    <div class="col-md-6 col-sm-6 col-xs-12"> \
+                                                      <select id="discounttype" name="discounttype" required="required" class="form-control col-md-7 col-xs-12"> \
+                                                            <option value="%">Percentage</option>\
+                                                            <option value="Amount">Amount</option>\
+                                                      </select> \
+                                                    </div> \
+                                                  </div> \
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12"> \
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ec"> Discount <span class="required">*</span> \
+                                                    </label> \
+                                                    <div class="col-md-6 col-sm-6 col-xs-12"> \
+                                                      <input type="text" id="discountvalue" name="discountvalue" required="required" class="form-control col-md-7 col-xs-12"> \
+                                                    </div> \
+                                                  </div> \
+                                  </div> \
+                                  <div class="modal-footer"> \
+                                      <button type="button" class="buttonNext btn btn-success" onclick="applydiscount()" data-dismiss="modal">Apply</button> \
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> \
+                                  </div> \
+                                </div> \
+                    ';
+                  document.getElementById("ecModal").innerHTML = html;
+                  $("#ecModal").modal();
+
+  }
+
+  function applydiscount(){
+        discount_type = $('#discounttype').val();
+        discount = $('#discountvalue').val();
+        let d = document.getElementById('totaldiscount');
+        let t = document.getElementById('totalamt');
+        let amt;
+        if (discount!=='0' && discount!==''){
+            if (discount_type==='%') {
+                d.innerHTML = 'Discount : '+discount+'%';
+                amt=Math.round(total*(1-discount/100));
+            }
+            else{
+                d.innerHTML = 'Discount : &#8377; '+discount;
+                amt=Math.round(total-discount);
+            }
+            d.style.display = 'inline-block';
+        }
+        else{
+            d.innerHTML = '';
+            d.style.display = 'none';
+            amt=total;
+            discount=0;
+            discount_type='';
+        }
+
+        t.innerHTML = "Total : "+String(amt);
+
+
+  }
+</script>

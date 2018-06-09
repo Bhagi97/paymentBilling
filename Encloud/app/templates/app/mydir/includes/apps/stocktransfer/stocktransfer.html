@@ -1,0 +1,166 @@
+<div class="page-title">
+                            <div class="title_left">
+                                  <h3 style="margin-left:20px;">Stock Return</h3>
+                            </div>
+                             <div class="title_right">
+                                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right ">
+                                    <div class="input-group">
+                                        <select id="q" class="form-control">
+                                          {% for c in stock %}
+                                            <option value="{{c.id}}">{{c.item_name}}</option>
+                                          {% endfor %}
+                                        </select>
+                                      <script>
+                                        document.getElementById("q").selectedIndex = -1;
+                                      </script>
+                                    </div>
+
+                                </div>
+                            </div>
+</div>
+
+<div class="row">
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                  <!-- -->
+                  <div class="x_panel">
+                  <div class="x_title">
+                    <h2><small>View stock</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <!-- -->
+                  <div id="collapseOne1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                          <div class="panel-body">
+                            <table id="datatable" class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>Items in stock</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for c in stock %}
+                                <tr>
+                                  <td><a href="#" onclick="getdetails('{{c.id}}')">{{c.item_name}}</a></td>
+                                </tr>
+                              {% endfor %}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><small>Submit Stock Return</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <form action="stockreturn.html" method="post" enctype="multipart/form-data" data-parsley-validate class="form-horizontal form-label-left"> {% csrf_token %}
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id">Stock ID
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="id" name="id" class="form-control col-md-7 col-xs-12" required="required" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="item_name">Name
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="item_name" name="item_name" required="required" class="form-control col-md-7 col-xs-12" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rate">MRP
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="rate" name="rate" class="form-control col-md-7 col-xs-12" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="stock_amount_present">Stock Quantity Present
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="stock_amount_present" name="stock_amount_present" data-parsley-type="digits" required="required" class="form-control col-md-7 col-xs-12" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="stock_amount_return">Stock Quantity To Return<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="stock_amount_return" name="stock_amount_return" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="reason">Reason for Return
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <textarea id="reason" name="reason" rows="4" required="required" class="form-control col-md-7 col-xs-12"></textarea>
+                        </div>
+                      </div>
+
+
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+						  <button class="btn btn-primary" type="reset">Reset</button>
+                          <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+<script>
+
+  function launchajax(id)
+  {
+    $.ajax({
+        url: '/ajax/getstockdetails/',
+        data: {
+          'id': id,
+        },
+        dataType: 'json',
+        success: function (data) {
+            document.getElementById("id").value = data.stock.id;
+            document.getElementById("item_name").value = data.stock.item_name;
+            document.getElementById("rate").value = data.stock.MRP;
+            document.getElementById("stock_amount_present").value = data.stock.stock_quantity;
+        }
+      });
+  }
+
+  $(document).on('change','#q',function(){
+      launchajax(document.getElementById("q").value);
+  });
+
+  function getdetails(sid)
+     {
+        $("#q").val(sid)
+        launchajax(sid);
+     }
+
+     $(document).ready(function() {
+      $('#datatable').dataTable({bFilter: false, bInfo: false, bLengthChange: false});
+     } );
+
+</script>

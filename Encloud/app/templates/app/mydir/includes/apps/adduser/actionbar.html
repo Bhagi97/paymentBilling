@@ -1,0 +1,167 @@
+<div class="actionBar">
+    <a href="#" id="prev" class="buttonPrevious btn btn-primary" style="display:none;position:absolute;left:30px;" onclick="loadPrev()">Previous</a>
+    <a href="javascript:{}" onclick="document.getElementById('addform').submit();" id="finish" class="buttonFinish btn btn-default" style="display:none;">Finish</a>
+    <a href="#" id="next" class="buttonNext btn btn-success" onclick="loadNext()">Next</a>
+</div>
+
+<script type="text/javascript">
+    var count=0;
+</script>
+
+<script>
+    function loadNext() {
+
+      for (i=1;i<=3;i++)
+      if(document.getElementById('step-'.concat(i.toString())).style.display=='block')
+      {
+         document.getElementById('step-'.concat((i).toString())).style.display='none';
+         document.getElementById('step-'.concat((i+1).toString())).style.display='block';
+
+         document.getElementById('button'.concat((i).toString())).className+=" done";
+         document.getElementById('button'.concat((i).toString())).className=document.getElementById('button'.concat((i).toString())).className.replace( /(?:^|\s)selected(?!\S)/g , '' );
+
+         document.getElementById('button'.concat((i+1).toString())).className=document.getElementById('button'.concat((i+1).toString())).className.replace( /(?:^|\s)disabled(?!\S)/g , '' );
+         document.getElementById('button'.concat((i+1).toString())).className+=" selected";
+
+         if (i==1)
+         {
+            document.getElementById("prev").style.display = "inline-block";
+         }
+         if (i==2)
+         {
+
+            document.getElementById("finish").style.display = "inline-block";
+            document.getElementById("next").style.display = "none";
+         }
+
+         break;
+      }
+    }
+
+    function loadPrev() {
+
+      for (i=1;i<=3;i++)
+      if(document.getElementById('step-'.concat(i.toString())).style.display=='block')
+      {
+         document.getElementById('step-'.concat((i).toString())).style.display='none';
+         document.getElementById('step-'.concat((i-1).toString())).style.display='block';
+
+         document.getElementById('button'.concat((i).toString())).className+=" disabled";
+         document.getElementById('button'.concat((i).toString())).className=document.getElementById('button'.concat((i).toString())).className.replace( /(?:^|\s)selected(?!\S)/g , '' );
+
+         document.getElementById('button'.concat((i-1).toString())).className=document.getElementById('button'.concat((i-1).toString())).className.replace( /(?:^|\s)done(?!\S)/g , '' );
+         document.getElementById('button'.concat((i-1).toString())).className+=" selected";
+
+         if (i==2)
+         {
+            document.getElementById("prev").style.display = "none";
+
+         }
+         if (i==3)
+         {
+            document.getElementById("finish").style.display = "none";
+            document.getElementById("next").style.display = "inline-block";
+         }
+
+         break;
+      }
+    }
+
+    let perm;
+
+    $(document).on('change','#organisation',function(){
+        document.getElementById("role").selectedIndex = -1;
+        $('input[type=checkbox]').prop('checked',false);
+    });
+
+
+        $(document).on('change','#role',function(){
+            var role = document.getElementById('role').value;
+            if(role==="Vendor") {
+                $('#organisation').val('Main Office');
+                new PNotify({
+                    title: 'Alert',
+                    text: 'Vendors can only belong to Main Office. Organisation has been changed.',
+                    type: 'info',
+                    styling: 'bootstrap3'
+                });
+            }
+            perm = {   'Accounts': {   "fr_a": false,'fr_d': false,'fr_e': false,
+                                    'im_c': false,'im_pa': false,'im_pr': false,'im_sa': false,
+                                    'im_se': false,'im_sku': false,'im_st': false,'im_tr': false,
+                                    'perm1': false,'perm2': false,'perm3': false,'perm4': false,
+                                    'permb1': false,'permb2': false, 'permb6': false,
+                                    'permd1': false,'permd2': false,'permd3': false,'permd4': false,
+                                    'permd5': false,'permd6': false,'permd7': false,
+                                    'permdis1': false,'permdis2': false,
+                                    'permr1': true,'permr2': true,'permr3': true,'permr5': true,'permr6': true,'permr7': false,
+                                    'permu1': false,'permu2': false},
+                    'Admin': {   'fr_a': true,'fr_d': true,'fr_e': true,
+                                 'im_c': true,'im_pa': true,'im_pr': true,'im_sa': true,'im_se': true,'im_sku': true,'im_st': true,'im_tr': true,
+                                 'perm1': true,'perm2': true,'perm3': true,'perm4': true,
+                                 'permb1': true,'permb2': true, 'permb6': true,
+                                 'permd1': true,'permd2': true,'permd3': true,'permd4': true,'permd5': true,'permd6': true,'permd7': true,
+                                 'permdis1': true,'permdis2': true,
+                                 'permr1': true,'permr2': true,'permr3': true,'permr5': true,'permr6': true,'permr7': true,
+                                 'permu1': true,'permu2': true	},
+                    'Vendor': {    'fr_a': false,'fr_d': false,'fr_e': false,
+                                        'im_c': false,'im_pa': false,'im_pr': false,'im_sa': false,'im_se': false,'im_sku': false,'im_st': false,'im_tr': false,
+                                        'perm1': false,'perm2': false,'perm3': false,'perm4': false,
+                                        'permb1': false,'permb2': false,'permb6': false,
+                                        'permd1': false,'permd2': false,'permd3': false,'permd4': false,'permd5': false,'permd6': false,'permd7': false,
+                                        'permdis1': true,'permdis2': true,
+                                        'permr1': true,'permr2': true,'permr3': true,'permr5': true,'permr6': true,'permr7': false,
+                                        'permu1': false,'permu2': false	},
+                    'Doctor': {   'fr_a': false, 'fr_d': false, 'fr_e': false,
+                                  'im_c': false, 'im_pa': false, 'im_pr': false, 'im_sa': false, 'im_se': false, 'im_sku': false, 'im_st': false, 'im_tr': false,
+                                  'perm1': false, 'perm2': false, 'perm3': false, 'perm4': false,
+                                  'permb1': false, 'permb2': false,'permb6': false,
+                                  'permd1': false, 'permd2': true, 'permd3': true, 'permd4': false, 'permd5': false, 'permd6': false, 'permd7': true,
+                                  'permdis1': false, 'permdis2': false,
+                                  'permr1': false, 'permr2': false, 'permr3': false, 'permr5': false, 'permr6': false, 'permr7': true,
+                                  'permu1': false, 'permu2': false	},
+                    'Pharmacist': {   'fr_a': false,'fr_d': false,'fr_e': false,
+                                      'im_c': false,'im_pa': false,'im_pr': false,'im_sa': false,'im_se': false,'im_sku': false,'im_st': false,'im_tr': false,
+                                      'perm1': false,'perm2': false,'perm3': false,'perm4': false,
+                                      'permb1': true,'permb2': true,'permb6': false,
+                                      'permd1': false,'permd2': false,'permd3': false,'permd4': false,'permd5': false,'permd6': true,'permd7': false,
+                                      'permdis1': false,'permdis2': false,
+                                      'permr1': false,'permr2': false,'permr3': true,'permr5': false,'permr6': false,'permr7': true,
+                                      'permu1': false,'permu2': false	},
+                    'Receptionist': {   'fr_a': false, 'fr_d': false, 'fr_e': false,
+                                        'im_c': false, 'im_pa': false, 'im_pr': false, 'im_sa': false, 'im_se': false, 'im_sku': false, 'im_st': false, 'im_tr': false,
+                                        'perm1': false, 'perm2': false, 'perm3': false, 'perm4': false,
+                                        'permb1': false, 'permb2': false,'permb6': false,
+                                        'permd1': true, 'permd2': false, 'permd3': false, 'permd4': false, 'permd5': true, 'permd6': true, 'permd7': false,
+                                        'permdis1': false, 'permdis2': false,
+                                        'permr1': false, 'permr2': false, 'permr3': false, 'permr5': false, 'permr6': false, 'permr7': false,
+                                        'permu1': false, 'permu2': false	}   };
+            if ($('#organisation').val()!=="Main Office")
+                perm['Admin']['permb6'] = perm['Admin']['fr_a'] = perm['Admin']['fr_d'] = perm['Admin']['fr_e'] = perm['Admin']['im_c'] =  false;
+            for (var property in perm) {
+                if (perm.hasOwnProperty(property)) {
+                   if(property==role)
+                       { perm=perm[property];
+                         break;
+                       }
+                }
+            }
+
+            for (var property in perm) {
+                if (perm.hasOwnProperty(property)) {
+                    ele = document.getElementById(property);
+                    if(ele!=null)
+                        ele.checked = (perm[property]);
+                }
+            }
+
+            var x = document.getElementById('regid-container');
+
+            if(role=='Doctor')
+                x.style.display = 'block';
+            else
+                { document.getElementById('regid').value = 0; x.style.display = 'none'; }
+
+         });
+
+</script>

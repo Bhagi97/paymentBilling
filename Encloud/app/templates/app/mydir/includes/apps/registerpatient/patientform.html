@@ -1,0 +1,302 @@
+<div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Add Patient details to database </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <form id="patiententry" method="post"  action="registerpatient.html" data-parsley-validate="" class="form-horizontal form-label-left"> {% csrf_token %}
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group" style="display:none;">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Request
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="request" name="request" class="form-control col-md-7 col-xs-12" value="" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gender">Gender
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select id="gender" name="gender" class="form-control">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phoneno">Phone Number
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="phoneno" name="phoneno" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="emailid">Email
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="emailid" name="emailid" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gstno">GST No.
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="gstno" name="gstno" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_name">Company Name
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="company_name" name="company_name" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dob">Date of Birth
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="date" id="dob" name="dob" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address1">Address
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" placeholder="House Name, Street Name" id="address1" name="address1" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address2">
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" placeholder="Locality, Pincode" id="address2" name="address2" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="country">Country </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select id="country" name="country" class="form-control" required="required">
+                            <option value="India">India</option>
+                          </select>
+                          <script>
+                            document.getElementById("country").selectedIndex = -1;
+                          </script>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="state">State </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select id="state" name="state" class="form-control" required="required">
+
+                          </select>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="district">District </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select id="district" name="district" class="form-control" required="required">
+
+                          </select>
+                          </div>
+                      </div>
+
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                          <button class="btn btn-primary" type="button">Cancel</button>
+						  <button class="btn btn-primary" type="reset">Reset</button>
+                          <button type="submit" onclick="submitform()" class="btn btn-success">Submit</button>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+{% include 'app/mydir/common/successfulinsertion.html' %}
+<!-- jquery.inputmask -->
+<script src="/static/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+
+<script>
+  function submitform(){
+    if ($('#patiententry').parsley().validate())
+     { $('#patiententry').submit()
+       document.getElementById('loader').style.display='block';
+     }
+  }
+
+  $(document).on('change','#country',function(){
+               metalist = [];
+      metalist.push(document.getElementById("country").value);
+      $.ajax({
+        url: '/ajax/getstates/',
+        data: {
+          'metalist': metalist,
+        },
+        dataType: 'json',
+        success: function (data) {
+            var b = "";
+            for (var j = 0; j < data.states.length; j++) {
+                        var s = '<option value="'+ data.states[j] +'">'+ data.states[j] +'</option>';
+                        b = b+s;
+                }
+            document.getElementById("state").innerHTML = b;
+            $('#state').val('Kerala (KL)');
+
+            metalist=[]
+            metalist.push(document.getElementById("country").value);
+            metalist.push(document.getElementById("state").value);
+            $.ajax({
+              url: '/ajax/getdistricts/',
+              data: {
+                'metalist': metalist,
+              },
+              dataType: 'json',
+              success: function (data) {
+                  var b = "";
+                  for (var j = 0; j < data.districts.length; j++) {
+                              var s = '<option value="'+ data.districts[j] +'">'+ data.districts[j] +'</option>';
+                              b = b+s;
+                      }
+                  document.getElementById("district").innerHTML = b;
+              }
+            });
+        }
+      });
+          });
+
+    $(document).on('change','#state',function(){
+               metalist = [];
+      metalist.push(document.getElementById("country").value);
+      metalist.push(document.getElementById("state").value);
+      $.ajax({
+        url: '/ajax/getdistricts/',
+        data: {
+          'metalist': metalist,
+        },
+        dataType: 'json',
+        success: function (data) {
+            var b = "";
+            for (var j = 0; j < data.districts.length; j++) {
+                        var s = '<option value="'+ data.districts[j] +'">'+ data.districts[j] +'</option>';
+                        b = b+s;
+                }
+            document.getElementById("district").innerHTML = b;
+        }
+      });
+          });
+
+  $(document).ready(function(){
+      {% if notify_message %}
+        window.location = "{{ url|safe }}";
+      {% endif %}
+
+      function getSearchParameters() {
+          var prmstr = window.location.search.substr(1);
+          return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+      }
+
+      function transformToAssocArray( prmstr ) {
+          var params = {};
+          var prmarr = prmstr.split("&");
+          for ( var i = 0; i < prmarr.length; i++) {
+              var tmparr = prmarr[i].split("=");
+              tmparr[1] = tmparr[1].replace(/%20/g, " ");
+              params[tmparr[0]] = tmparr[1];
+          }
+          return params;
+      }
+
+      var params = getSearchParameters();
+      var i = 0;
+      for (var p in params) {
+          if( params.hasOwnProperty(p) ) {
+              if (i<=3)
+                document.getElementById(p).value = params[p];
+              else
+                break;
+              ++i;
+          }
+      }
+      $('[name=country]').val(params["country"]);
+      change_country();
+      setTimeout(function(){
+            $("#state > option").each(function() {
+                  if(this.text.startsWith(params["state"]))
+                    $('[name=state]').val(this.text);
+            })
+        }, 500);
+      setTimeout(function(){ change_state(); }, 1500);
+      setTimeout(function(){
+          $('[name=district]').val(params["district"])
+        }, 3000);
+
+  });
+
+  function change_country(){
+      metalist = [];
+      metalist.push(document.getElementById("country").value);
+      $.ajax({
+        url: '/ajax/getstates/',
+        data: {
+          'metalist': metalist,
+        },
+        dataType: 'json',
+        success: function (data) {
+            var b = "";
+            for (var j = 0; j < data.states.length; j++) {
+                        var s = '<option value="'+ data.states[j] +'">'+ data.states[j] +'</option>';
+                        b = b+s;
+                }
+            document.getElementById("state").innerHTML = b;
+        }
+      });
+  }
+
+
+  function change_state(){
+  metalist = [];
+      metalist.push(document.getElementById("country").value);
+      metalist.push(document.getElementById("state").value);
+      $.ajax({
+        url: '/ajax/getdistricts/',
+        data: {
+          'metalist': metalist,
+        },
+        dataType: 'json',
+        success: function (data) {
+            var b = "";
+            for (var j = 0; j < data.districts.length; j++) {
+                        var s = '<option value="'+ data.districts[j] +'">'+ data.districts[j] +'</option>';
+                        b = b+s;
+                }
+            document.getElementById("district").innerHTML = b;
+        }
+      });
+  }
+
+  $("#dob").on("change", function() {
+     if (moment($(this).val()) > moment())
+        {  alert("The date you have selected is in the future. Please select another date." );
+           $("#dob").val('');
+        }
+  });
+
+</script>

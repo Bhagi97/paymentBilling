@@ -1,0 +1,61 @@
+{% extends "interface/base.html" %}
+{% block content %}
+
+    <!-- header
+    ================================================== -->
+    {% include 'interface/elements/header.html' %}
+
+    {#Login Section#}
+
+        <section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="/static/interface/images/hero-bg.jpg" data-natural-width=3000 data-natural-height=2000 data-position-y=center>
+
+            <div class="overlay"></div>
+            <div class="shadow-overlay"></div>
+
+            <div class="home-content">
+
+                <div class="row home-content__main">
+                    <h1>Login</h1>
+                        <form action="/login" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div style="margin: 5vw;">
+                                <label for="username" style="color:#FFFFFF">Username</label>
+                                <input style="color:#FFFFFF; border-bottom: 2px solid #FFFFFF; width:50%;" type="text" id="username" name="username">
+                            </div>
+                            <div style="margin: 5vw;">
+                                <label for="password" style="color:#FFFFFF">Password</label>
+                                <input type="password" style="color:#FFFFFF; border-bottom: 2px solid #FFFFFF; width:50%;" id="password" name="password">
+                            </div>
+
+
+                            <input class="btn--primary" style="margin-left: 5vw;" type="submit" value="Submit">
+
+                        </form>
+
+
+                </div>
+
+                <div class="home-content__scroll">
+                    <a href="#my-footer" class="scroll-link smoothscroll">
+                        <span>Scroll Down</span>
+                    </a>
+                </div>
+
+                <div class="home-content__line"></div>
+
+            </div> <!-- end home-content -->
+
+
+        </section> <!-- end s-home -->
+
+
+    <!-- footer
+    ================================================== -->
+    {% include 'interface/elements/footer.html' %}
+
+
+    <!-- Random
+    ================================================== -->
+    {% include 'interface/elements/random.html' %}
+
+{% endblock %}

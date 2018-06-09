@@ -1,0 +1,10 @@
+{% extends "app/mydir/common/maincontent.html" %}
+{% block content %}
+
+{% if franchise_code == 0 %}
+{% include "app/mydir/includes/apps/newbill/newbill_ho.html" %}
+{% else %}
+{% include "app/mydir/includes/apps/newbill/newbill.html" %}
+{% endif %}
+
+{% endblock %}

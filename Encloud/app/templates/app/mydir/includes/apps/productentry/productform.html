@@ -1,0 +1,181 @@
+<div class="page-title">
+                            <div class="title_left">
+                                  <h3 style="margin-left:20px;">Products</h3>
+                            </div>
+                             <div class="title_right">
+                                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right ">
+                                    <div class="input-group">
+                                        <select id="q" class="form-control">
+                                          {% for c in products %}
+                                            <option value="{{c.item_name}}">{{c.item_name}}</option>
+                                          {% endfor %}
+                                        </select>
+                                      <script>
+                                        document.getElementById("q").selectedIndex = -1;
+                                      </script>
+                                    </div>
+
+                                </div>
+                            </div>
+</div>
+
+            <div class="row">
+
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Form Wizard</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+
+                    <!-- Smart Wizard -->
+                    <p>This form adds/edits items in your item master</p>
+                    <div id="wizard" class="form_wizard wizard_horizontal">
+                      <ul class="wizard_steps">
+                        <li>
+                          <a id="button1" class="selected" isdone="1">
+                            <span class="step_no">1</span>
+                            <span class="step_descr">
+                                              Step 1<br />
+                                              <small>Basic Details</small>
+                                          </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a id="button2" class="disabled" isdone="0">
+                            <span class="step_no">2</span>
+                            <span class="step_descr">
+                                              Step 2<br />
+                                              <small>Pricing</small>
+                                          </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a id="button3" class="disabled" isdone="0">
+                            <span class="step_no">3</span>
+                            <span class="step_descr">
+                                              Step 3<br />
+                                              <small>Additional Details</small>
+                                          </span>
+                          </a>
+                        </li>
+
+                      </ul>
+                      <form id="addproduct" action="mydir/productentry.html" method="post" class="form-horizontal form-label-left" data-parsley-validate=""> {% csrf_token %}
+
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="item_id">Item ID </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="item_id" name="item_id" placeholder="Leave blank for new products" class="form-control col-md-7 col-xs-12" readonly>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="item_name">Item Name <span class="required">*</span> </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="item_name" name="item_name" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="MRP">MRP <span class="required">*</span> </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="MRP" name="MRP" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Category <span class="required">*</span> </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                             <select id="category" name="category" class="form-control">
+                               {% for c in category %}
+                               <option value="{{c.category_name}}">{{c.category_name}}</option>
+                               {% endfor %}
+                             </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="remarks">Remarks</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <textarea id="remarks" name="remarks" class="form-control col-md-7 col-xs-12" rows="3" ></textarea>
+                            </div>
+                          </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                              <button type="button" class="buttonNext btn btn-danger" onclick="delete_product()">Delete</button>
+                              <button class="btn btn-primary" type="reset">Reset</button>
+                              <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+
+                    </form>
+                    </div>
+                    <!-- End SmartWizard Content -->
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+<script>
+  $(document).on('change','#q',function(){
+               metalist = [];
+      metalist.push(document.getElementById("q").value);
+      $.ajax({
+        url: '/ajax/getproducts/',
+        data: {
+          'metalist': metalist,
+        },
+        dataType: 'json',
+        success: function (data) {
+            document.getElementById("item_id").value = data.product.id;
+            document.getElementById("item_name").value = data.product.item_name;
+            document.getElementById("MRP").value = data.product.MRP;
+            $('[name=category]').val(data.product.category);
+            document.getElementById("remarks").value = data.product.remarks;
+            if(data.product.delete==1)
+                document.getElementById("del").style.display = 'inline-block';
+        }
+      });
+          });
+
+    function delete_product()
+    {
+        del_id = document.getElementById("item_id").value;
+        if(del_id=='')
+            { alert("No product selected"); return; }
+        $.ajax({
+            url: '/ajax/deleteproduct/',
+            data: {
+              'del_id': del_id,
+              },
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                if (data.success==1)
+                    { document.getElementById("message").innerHTML = 'Successfully deleted product';
+                      var x = document.getElementById('notify2');
+                      x.style.display = 'block';
+                      setTimeout(function(){ location.reload(); }, 2000);
+                    }
+                else
+                    {  document.getElementById("message-f").innerHTML = 'Failed to delete product - '+data.error;
+                       var x = document.getElementById('notify-f2');
+                       x.style.display = 'block';
+                    }
+              }
+        });
+    }
+
+</script>

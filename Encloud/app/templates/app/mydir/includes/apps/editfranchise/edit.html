@@ -1,0 +1,343 @@
+          <div class="">
+            <div class="page-title" style="margin-bottom:10px;">
+              <div class="title_left">
+                <h3>Edit Franchisee</h3>
+              </div>
+
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="row">
+
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Form Wizard</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+
+                    <!-- Smart Wizard -->
+                    <p>This fom edits an existing franchisee in your business.</p>
+                    <div id="wizard" class="form_wizard wizard_horizontal">
+                      <ul class="wizard_steps">
+                        <li>
+                          <a id="button1" class="selected" isdone="1">
+                            <span class="step_no">1</span>
+                            <span class="step_descr">
+                                              Step 1<br />
+                                              <small>Basic Details</small>
+                                          </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a id="button2" class="disabled" isdone="0">
+                            <span class="step_no">2</span>
+                            <span class="step_descr">
+                                              Step 2<br />
+                                              <small>Location</small>
+                                          </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a id="button3" class="disabled" isdone="0">
+                            <span class="step_no">3</span>
+                            <span class="step_descr">
+                                              Step 3<br />
+                                              <small>Owner Details</small>
+                                          </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a id="button4" class="disabled" isdone="0">
+                            <span class="step_no">4</span>
+                            <span class="step_descr">
+                                              Step 4<br />
+                                              <small>Franchisee Permisssions</small>
+                                          </span>
+                          </a>
+                        </li>
+                      </ul>
+                        {% for f in franchise %}
+                      <form id="editform" action="viewfranchise.html?id={{ id }}" method="post" class="form-horizontal form-label-left"> {% csrf_token %}
+                      <div id="step-1" style="display:block;">
+
+
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="franchise-name">Franchisee Name </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="franchise-name" value="{{f.franchise_name}}" name="franchise-name" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                            <p id="up" style="margin-top:7px"></p>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="franchise-code">Franchisee Code </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="franchise-code" value="{{f.id}}" name="franchise-code" readonly class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Franchisee Type</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                             <select id="franchise-type" name="franchise-type" class="form-control">
+                               <option
+                                       {% if f.franchise_type == "Brahmi" %}
+                                            selected="selected"
+                                        {% endif %}
+                                 value="Brahmi">Brahmi</option>
+                               <option
+                                       {% if f.franchise_type == "Tulsi" %}
+                                            selected="selected"
+                                        {% endif %}
+                                 value="Tulsi">Tulsi</option>
+                               <option
+                                       {% if f.franchise_type == "Arayaal" %}
+                                            selected="selected"
+                                        {% endif %}
+                                 value="Arayaal">Arayaal</option>
+                               <option {% if f.franchise_type == "Ashoka" %}
+                                            selected="selected"
+                                        {% endif %}
+                                 value="Ashoka">Ashoka</option>
+
+                             </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phoneno">Phone Number </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="phoneno" name="phoneno" value="{{f.phoneno}}" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Address </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <textarea id="address" name="address" class="form-control col-md-7 col-xs-12" rows="3" required="required" >{{f.address}}</textarea>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="town">Town</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="town" name="town" value="{{f.town}}" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="country">Country </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select id="country" name="country" class="form-control">
+                              {% for c in countries %}
+                                <option
+                                        {% if c == f.country %}
+                                            selected
+                                        {% endif %}
+                                        value="{{c}}">{{c}}</option>
+                              {% endfor %}
+                            </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="state">State </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select id="state" name="state" class="form-control">
+                              {% for c in states %}
+                                <option
+                                        {% if c == f.state %}
+                                            selected
+                                        {% endif %}
+                                        value="{{c}}">{{c}}</option>
+                              {% endfor %}
+                            </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="district">District </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select id="district" name="district" class="form-control">
+                              {% for c in districts %}
+                                <option
+                                        {% if c == f.district %}
+                                            selected
+                                        {% endif %}
+                                        value="{{c}}">{{c}}</option>
+                              {% endfor %}
+                            </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pincode">Pin Code </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="pincode" name="pincode" required="required" value="{{f.pincode}}" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+
+                      </div>
+                      <div id="step-2" style="display:none;">
+
+
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="bankaccountno">Bank Account No</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="bankaccountno" name="bankaccountno" required="required" value="{{f.bankaccountno}}" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="bankname">Bank Name</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="bankname" name="bankname" required="required" value="{{f.bankname}}" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ifsccode">IFSC Code</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="ifsccode" name="ifsccode" required="required" value="{{f.ifsccode}}" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gstno">GST No.</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="gstno" name="gstno" required="required" value="{{f.gstno}}" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dlo">Drug License No.</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="dlo" name="dlo" required="required" value="{{f.druglicenseno}}" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pincode">Website Link</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="website" name="website" required="required" value="{{f.website}}" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                      </div>
+                      <div id="step-3" style="display:none;">
+
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="owner">Owner Name </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="owner" name="owner" required="required" value="{{f.owner}}" readonly class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ownercontact">Owner Contact Number </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="ownercontact" name="ownercontact" required="required" value="{{f.ownercontact}}" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="remarks">Remarks </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <textarea id="remarks" name="remarks" class="form-control col-md-7 col-xs-12" rows="3" value="{{f.remarks}}" required="required" ></textarea>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ownercontact">Vendor </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <select id="vendor" name="vendor" class="form-control">
+                                {% for d in vendor_list %}
+                                <option
+                                        {% if d == f.vendor %}
+                                            selected
+                                        {% endif %}
+                                        value="{{d.id}}">{{d.name}} {{d.user.username}}</option>
+                              {% endfor %}
+                              </select>
+                            </div>
+                          </div>
+                      </div>
+                      <div id="step-4" style="display:none;">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="permbs1">Bill Settings </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <div class="checkbox">
+                                <label class="">
+                                  <input id="permbs1" name="permbs1" class="flat" {% if f.permbs1 %} checked {% endif %}  type="checkbox">Include Club Ayurveda Header
+                                </label>
+                              </div>
+                              <div class="checkbox">
+                                <label class="">
+                                  <input id="permbs2" name="permbs2" class="flat" {% if f.permbs2 %} checked {% endif %}  type="checkbox">Include Club Ayurveda Footer
+                                </label>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Currency</label>
+                            <div class="col-md-3 col-sm-3 col-xs-12" style="margin-left:20px;">
+                             <select id="currency" name="currency" class="form-control">
+                               <option value="Rupees">Rupees</option>
+                             </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="permb3">Bill Categories </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <div class="checkbox">
+                                <label class="">
+                                  <input id="permb3" name="permb3" class="flat" {% if f.permb3 %} checked {% endif %}  type="checkbox">Pharmacy
+                                </label>
+                              </div>
+                              <div class="checkbox">
+                                <label class="">
+                                  <input id="permb4" name="permb4" class="flat" {% if f.permb4 %} checked {% endif %}  type="checkbox">In Patient
+                                </label>
+                              </div>
+                              <div class="checkbox">
+                                <label class="">
+                                  <input id="permb5" name="permb5" class="flat" {% if f.permb5 %} checked {% endif %}  type="checkbox">Packages
+                                </label>
+                              </div>
+                            </div>
+                         </div>
+                      </div>
+                        {% include "app/mydir/includes/apps/editfranchise/actionbar.html" %}
+                    </form>
+                        {% endfor %}
+                    </div>
+
+                    <!-- End SmartWizard Content -->
+
+
+
+
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <script>
+          jQuery('#franchise-name').on('input propertychange paste', function() {
+              var text = $(this).val()
+              $.ajax({
+              url: '/ajax/checkfranchisename/',
+              data: {
+                'name': $(this).val()
+              },
+              dataType: 'json',
+              async: false,
+              success: function (data) {
+                  var d = document.getElementById("up");
+                  var fname ="{{ franchise.0.franchise_name }}";
+                  if(text!='' && text!=fname)
+                    d.innerHTML = data.message;
+                  else
+                    d.innerHTML='';
+                  d.style.color = data.colour;
+              }
+            });
+          });
+
+          </script>
+
