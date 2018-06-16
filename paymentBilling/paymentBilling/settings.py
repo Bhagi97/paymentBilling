@@ -32,9 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'Customer',
-    'ElaAdmin',
     'tastypie',
-    'django_tables2',
     'paymentBilling',
     'django.contrib.admin',
     'django.contrib.auth',
