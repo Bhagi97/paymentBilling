@@ -25,14 +25,16 @@ SECRET_KEY = '#)dim#y%74wpn46om^vyg$&73mkter22%2kc+zgjd=a+e-()_z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS =["*"]
 
 # Application definition
 
 INSTALLED_APPS = [
     'Customer',
+    'ElaAdmin',
     'tastypie',
+    'django_tables2',
     'paymentBilling',
     'django.contrib.admin',
     'django.contrib.auth',

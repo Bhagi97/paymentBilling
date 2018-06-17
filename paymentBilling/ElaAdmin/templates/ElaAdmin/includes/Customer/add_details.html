@@ -1,0 +1,63 @@
+{% extends 'ElaAdmin/common/page.html' %}
+
+{% block content %}
+
+            <!-- Bread crumb -->
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-primary">Dashboard</h3> </div>
+                <div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- End Bread crumb -->
+            <!-- Container fluid  -->
+            <div class="container-fluid">
+                <!-- Start Page Content -->
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-validation">
+                                    <form class="form-valide" action="../form_submit_Customer/" method="post">
+
+                                        {% csrf_token %}
+                                        <!--{{ form }}-->
+
+                                        {% for field in form %}
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="{{ field.name }}">{{ field.label }}<span class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+
+                                                {{ field }}
+
+                                            </div>
+                                        </div>
+
+                                        {% endfor %}
+
+                                        <div class="form-group row">
+                                            <div class="col-lg-8 ml-auto">
+                                                <button type="submit" class="btn btn-success m-b-10 m-l-5" id="toastr-success-top-right" value="Submit">Submit</button>
+                                                <!--<input type="submit" value="Submit"/>-->
+                                            </div>
+                                        </div>
+
+
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End PAge Content -->
+            </div>
+            <!-- End Container fluid  -->
+
+
+{% endblock %}
