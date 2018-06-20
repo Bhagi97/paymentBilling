@@ -19,5 +19,8 @@ from django.conf.urls import url, include
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^customer/', include('Customer.urls')),
+    # url(r'^batchimport/', include('batchimport.urls')),
+    url(r'client/', include('Client.urls')),
     url(r'^', include('ElaAdmin.urls')),
+
 ]

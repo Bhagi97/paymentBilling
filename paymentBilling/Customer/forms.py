@@ -25,6 +25,24 @@ class AddCustomerDetailsForm(forms.Form):
             }
         )
     )
+    number = forms.IntegerField(
+        label='Number',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control input-rounded',
+                'placeholder': 'Enter your number..'
+            }
+        )
+    )
+    address = forms.CharField(
+        label='Address',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control input-rounded',
+                'placeholder': 'Enter your address'
+            }
+        )
+    )
 
 
 class AddInvoiceDetailsForm(forms.Form):
@@ -50,8 +68,8 @@ class AddInvoiceDetailsForm(forms.Form):
             }
         )
     )
-    amount = forms.FloatField(
-        label='Amount',
+    total_amount = forms.FloatField(
+        label='Total Amount',
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control input-rounded',
@@ -61,4 +79,37 @@ class AddInvoiceDetailsForm(forms.Form):
             }
         )
     )
+    pending_amount = forms.FloatField(
+        label='Pending Amount',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control input-rounded',
+                'id': 'val-currency',
+                'name': 'val-currency',
+                'placeholder': 'Enter pending amount..'
+            }
+        )
+    )
+    issue_date = forms.DateField(
+        label='Issue Date',
+        widget=forms.DateInput(
+            attrs={
+                'class': 'form-control input-rounded',
+                'id': 'val-date',
+                'name': 'val-date',
+                'placeholder': 'DD/MM/YYYY'
+            }
+        )
+    )
+    number = forms.IntegerField(
+        label='Number',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control input-rounded',
+                'placeholder': 'Enter your number..'
+            }
+        )
+    )
+
+
 

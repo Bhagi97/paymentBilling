@@ -31,9 +31,11 @@ ALLOWED_HOSTS =["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'Client',
     'Customer',
     'ElaAdmin',
     'tastypie',
+    'import_export',
     'django_tables2',
     'paymentBilling',
     'django.contrib.admin',
@@ -123,6 +125,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 # LOGIN_REDIRECT_URL = 'home'
 # LOGOUT_REDIRECT_URL = 'home'

@@ -9,9 +9,16 @@ from tastypie.http import HttpUnauthorized, HttpForbidden
 from tastypie.utils import trailing_slash
 from django.conf.urls import url
 
+from import_export import resources
+
+
+class ImportCustomerResource(resources.ModelResource):
+    class Meta:
+        model = Customer
+
 
 class CustomerResource(ModelResource):
-    invoice_details = fields.ToManyField('Customer.resources.InvoiceResource', 'pending', full=True, null=True)
+    invoice_details = fields.ToManyField('Customer.resources.InvoiceResource', 'invoice', full=True, null=True)
 
     class Meta:
         queryset = Customer.objects.all()
