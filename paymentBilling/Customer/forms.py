@@ -1,5 +1,5 @@
 from django import forms
-
+from Client.models import Client
 
 class AddCustomerDetailsForm(forms.Form):
     code = forms.IntegerField(
@@ -40,6 +40,15 @@ class AddCustomerDetailsForm(forms.Form):
             attrs={
                 'class': 'form-control input-rounded',
                 'placeholder': 'Enter your address'
+            }
+        )
+    )
+    client = forms.CharField(
+        label='Client',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control input-rounded',
+                'placeholder': 'Enter client name'
             }
         )
     )
@@ -97,7 +106,7 @@ class AddInvoiceDetailsForm(forms.Form):
                 'class': 'form-control input-rounded',
                 'id': 'val-date',
                 'name': 'val-date',
-                'placeholder': 'DD/MM/YYYY'
+                'placeholder': 'YYYY-MM-DD'
             }
         )
     )
@@ -107,6 +116,15 @@ class AddInvoiceDetailsForm(forms.Form):
             attrs={
                 'class': 'form-control input-rounded',
                 'placeholder': 'Enter your number..'
+            }
+        )
+    )
+    client = forms.CharField(
+        label='Client',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control input-rounded',
+                'placeholder': 'Enter client name'
             }
         )
     )

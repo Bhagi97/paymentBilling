@@ -1,4 +1,4 @@
-from tastypie.resources import ModelResource
+from tastypie.resources import ModelResource, ALL
 from tastypie import fields
 
 from .models import Client, Profile
@@ -12,6 +12,7 @@ class ClientResource(ModelResource):
         queryset = Client.objects.all()
         resource_name = 'client'
         authorization = Authorization()
+        filtering = {'id': ALL}
 
 
 class ProfileResource(ModelResource):
@@ -21,3 +22,4 @@ class ProfileResource(ModelResource):
         queryset = Profile.objects.all()
         resource_name = 'profile'
         authorization = Authorization()
+        filtering = {'id': ALL}

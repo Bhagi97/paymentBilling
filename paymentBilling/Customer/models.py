@@ -7,8 +7,9 @@ class Customer(models.Model):
     code = models.IntegerField(unique=True)
     name = models.CharField(max_length=30)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)  # is on_delete required?
-    number = models.IntegerField()
+    phone_no = models.CharField(max_length=10)
     address = models.CharField(max_length=200, null=True)
+    profile = models.ForeignKey(Profile)
 
     def __str__(self):
         return str(self.code)
@@ -20,7 +21,7 @@ class Invoice(models.Model):
     invoice_number = models.IntegerField()
     total_amount = models.FloatField()
     pending_amount = models.FloatField()
-    number = models.IntegerField()  # confirmation required on whether it is an integer or char field
+    number = models.CharField(max_length=20)  # char field
     issue_date = models.DateField()
     client = models.ForeignKey(Client)  # is on_delete required?
 
@@ -34,9 +35,10 @@ class Receipt(models.Model):
     customer = models.ForeignKey(Customer)
     client = models.ForeignKey(Client)
     amount = models.FloatField()
+    issue_date = models.DateField()
     method = models.CharField(max_length=20)  # payment method
     details = models.CharField(max_length=300)  # extra details
-    number = models.IntegerField()  # confirmation required on whether it is an integer or char field
+    number = models.CharField(max_length=20)  # char field
 
     def __str__(self):
-        return str(self.number)
+        return self.number

@@ -7,6 +7,7 @@ c_api = Api(api_name='api')
 c_api.register(CustomerResource())
 c_api.register(InvoiceResource())
 c_api.register(UserResource())
+c_api.register(ReceiptResource())
 
 
 urlpatterns = [
