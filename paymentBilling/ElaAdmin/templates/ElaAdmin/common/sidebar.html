@@ -6,6 +6,20 @@
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
                 <li class="nav-devider"></li>
+
+                {% ifnotequal user.groups.all.0.name "supervisor" %}
+
+                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Profile </span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="../add_profile.html">Add</a></li>
+                        <li><a href="#/">Edit </a></li>
+                        <!--<li><a href="#">Edit</a></li>-->
+
+                    </ul>
+                </li>
+
+                {% endifnotequal %}
+
                 <!--<li class="nav-label">Customer</li>-->
                 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Customer </span></a>
                     <ul aria-expanded="false" class="collapse">

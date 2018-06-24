@@ -11,11 +11,23 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from Customer.resources import ImportCustomerResource
 
-from django.contrib.auth.models import User, Permission
+from django.contrib.auth.models import User, Permission, Group
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 
 # Create your views here.
+
+
+def group_check_admin(user):
+    return user.groups.filter(name__in=['admin', 'superuser', 'supervisor'])
+
+
+def is_superuser(user):
+    return user.groups.filter(name__in=['superuser']).exists()
+
+
+def is_admin(user):
+    return user.groups.filter(name__in=['admin']).exists()
 
 
 def login_request(request):
@@ -33,24 +45,30 @@ def login_request(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                for x in Permission.objects.filter(user=request.user):
-                    perm_list[x.codename] = True
-                context = {'permissions': perm_list}
+                # for x in Permission.objects.filter(user=request.user):
+                #     perm_list[x.codename] = True
+                # context = {'permissions': perm_list}
 
-                return render(request, 'ElaAdmin/index.html', context)
+                return HttpResponseRedirect('/index.html')
+            else:
+                # display not user page
+                return HttpResponseRedirect('/page-error-403.html')
 
     else:
         form = LoginForm()
         return render(request, 'ElaAdmin/login.html', {'form': form})
 
 
-@login_required(login_url='login.html')
+# @login_required(login_url='login.html')
 def logout_request(request):
     logout(request)
     form = LoginForm()
     return render(request, 'ElaAdmin/login.html', {'form': form})
 
 
+@login_required
+# @user_passes_test(is_superuser)
+# @user_passes_test(is_admin)
 def add_profile(request):
 
     if request.method == 'POST':
@@ -64,8 +82,8 @@ def add_profile(request):
             password = form.cleaned_data['password']
             email_id = form.cleaned_data['email_id']
 
-            user = User.objects.create_user(username, email_id, password)
-            user.save()
+            newuser = User.objects.create_user(username, email_id, password)
+            newuser.save()
 
             role_key = form.cleaned_data['role']
             roles = {
@@ -77,16 +95,27 @@ def add_profile(request):
 
             phone_no = form.cleaned_data['phone_no']
             try:
-                client = Client.objects.get(name=form.cleaned_data['client'])
+                if request.user.groups.filter(name__in=['superuser']).exists():
+                    client = Client.objects.get(name=form.cleaned_data['client'])  # if superuser
+                elif request.user.groups.filter(name__in=['admin']):
+                    # current_profile = Profile.objects.get(user=request.user)
+                    client_name = request.user.profile.client.name
+                    client = Client.objects.get(name=client_name)
 
             except ObjectDoesNotExist:
                 return HttpResponseRedirect('/page-error-400.html')
 
-            kwargs = {'user': user, 'role': role, 'client': client, 'phone_no': phone_no, }
+            kwargs = {'user': newuser, 'role': role, 'client': client, 'phone_no': phone_no, }
             profile = Profile(**kwargs)
             profile.save()
 
+            my_group = Group.objects.get(name=role)
+            my_group.user_set.add(newuser)
+
             return HttpResponseRedirect('/index.html')
+
+        else:
+            return HttpResponseRedirect('<h1>Form invalid</h1>')
 
     else:
         form = RegisterProfileForm()
@@ -94,15 +123,23 @@ def add_profile(request):
 
 
 @login_required(login_url='login.html')
+@user_passes_test(group_check_admin, login_url='../page-error-403.html')
+# @user_passes_test(is_superuser, login_url='../page-error-403.html')
+# @user_passes_test(is_admin, login_url='../page-error-403.html')
 def index(request):
+
     return render(request, 'ElaAdmin/index.html')
 
 
-def page_error(request):
+def page_error_403(request):
+    return render(request, 'ElaAdmin/page-error-403.html')
+
+
+def page_error_400(request):
     return render(request, 'ElaAdmin/page-error-400.html')
 
 
-@login_required(login_url='login.html')
+# @login_required(login_url='login.html')
 def import_file(request):
     if request.method == 'POST':
         customer_resource = ImportCustomerResource()
@@ -120,7 +157,7 @@ def import_file(request):
     return render(request, 'ElaAdmin/index.html')
 
 
-@login_required(login_url='login.html')
+# @login_required(login_url='login.html')
 def exportCustomer(request):
 
     data = Customer.objects.all()
@@ -130,7 +167,7 @@ def exportCustomer(request):
     return render(request, 'ElaAdmin/exportCustomer.html', content)
 
 
-@login_required(login_url='login.html')
+# @login_required(login_url='login.html')
 def add_details_Customer(request):
     if request.method == 'POST':
         # create form instance and populate it with data:
@@ -168,7 +205,7 @@ def add_details_Customer(request):
         return render(request, 'ElaAdmin/addCustomer.html', {'form': form})
 
 
-@login_required(login_url='login.html')
+# @login_required(login_url='login.html')
 def add_details_Invoice(request):
     # customer_code = request.session.get('code')
     if request.method == 'POST':

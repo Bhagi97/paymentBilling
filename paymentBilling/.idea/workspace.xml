@@ -11,25 +11,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Customer/models.py">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ElaAdmin/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-220">
-              <caret line="12" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="-34">
+              <caret line="120" column="1" selection-start-line="120" selection-start-column="1" selection-end-line="120" selection-end-column="1" />
               <folding>
-                <element signature="e#0#28#0" expanded="true" />
+                <element signature="e#0#35#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Customer/forms.py">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Client/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1038">
-              <caret line="129" column="5" lean-forward="true" selection-start-line="129" selection-start-column="5" selection-end-line="129" selection-end-column="5" />
+            <state relative-caret-position="187">
+              <caret line="24" column="53" lean-forward="true" selection-start-line="24" selection-start-column="53" selection-end-line="24" selection-end-column="60" />
               <folding>
-                <element signature="e#0#24#0" expanded="true" />
+                <element signature="e#0#28#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -39,63 +39,9 @@
         <entry file="file://$PROJECT_DIR$/Customer/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
-              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+              <caret line="12" selection-start-line="12" selection-end-line="12" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add_profile.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/add_profile.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-17">
-              <caret line="11" column="81" lean-forward="true" selection-start-line="11" selection-start-column="81" selection-end-line="11" selection-end-column="81" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ElaAdmin/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="187" column="48" lean-forward="true" selection-start-line="187" selection-start-column="48" selection-end-line="187" selection-end-column="48" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ElaAdmin/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="935">
-              <caret line="66" column="4" lean-forward="true" selection-start-line="66" selection-start-column="4" selection-end-line="70" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="resources.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Customer/resources.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="43" column="40" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
-              <folding>
-                <element signature="e#0#69#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Customer/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -104,8 +50,8 @@
       <file leaf-file-name="resources.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Client/resources.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="31" lean-forward="true" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+            <state relative-caret-position="-16">
+              <caret line="8" column="78" selection-start-line="8" selection-start-column="78" selection-end-line="8" selection-end-column="78" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
               </folding>
@@ -113,13 +59,59 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/models.py">
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ElaAdmin/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="61" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
+            <state relative-caret-position="256">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add_profile.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/add_profile.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="392">
+              <caret line="34" column="50" lean-forward="true" selection-start-line="34" selection-start-column="50" selection-end-line="34" selection-end-column="50" />
               <folding>
-                <element signature="e#0#28#0" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="17" selection-start-line="17" selection-end-line="17" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/includes/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-34" />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="navbar_right.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/common/navbar_right.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="13" column="161" selection-start-line="13" selection-start-column="161" selection-end-line="13" selection-end-column="161" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="resources.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Customer/resources.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="222">
+              <caret line="102" column="38" lean-forward="true" selection-start-line="102" selection-start-column="38" selection-end-line="102" selection-end-column="38" />
+              <folding>
+                <element signature="e#0#69#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -150,7 +142,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/check.html" />
         <option value="$PROJECT_DIR$/login/login_api.py" />
         <option value="$PROJECT_DIR$/manage.py" />
         <option value="$PROJECT_DIR$/Customer/api.py" />
@@ -170,41 +161,42 @@
         <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/includes/index.html" />
         <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/index.html" />
         <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/includes/Customer/add_success.html" />
-        <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/page-error-400.html" />
         <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/add.html" />
         <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/includes/Invoice/add_details.html" />
         <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/addInvoice.html" />
         <option value="$PROJECT_DIR$/Customer/views.py" />
         <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/CustomerVerification.html" />
         <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/includes/Customer/verification.html" />
-        <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/common/sidebar.html" />
         <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/common/base.html" />
         <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/includes/Customer/add_details.html" />
         <option value="$PROJECT_DIR$/batchimport/utils.py" />
         <option value="$PROJECT_DIR$/batchimport/urls.py" />
         <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/includes/Customer/export_details.html" />
-        <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/common/navbar_right.html" />
         <option value="$PROJECT_DIR$/paymentBilling/settings.py" />
         <option value="$PROJECT_DIR$/Client/admin.py" />
         <option value="$PROJECT_DIR$/Customer/admin.py" />
         <option value="$PROJECT_DIR$/Client/views.py" />
         <option value="$PROJECT_DIR$/Client/urls.py" />
-        <option value="$PROJECT_DIR$/paymentBilling/urls.py" />
-        <option value="$PROJECT_DIR$/Client/models.py" />
-        <option value="$PROJECT_DIR$/ElaAdmin/urls.py" />
-        <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/login.html" />
-        <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/add_profile.html" />
-        <option value="$PROJECT_DIR$/ElaAdmin/forms.py" />
         <option value="$PROJECT_DIR$/Customer/forms.py" />
-        <option value="$PROJECT_DIR$/ElaAdmin/views.py" />
         <option value="$PROJECT_DIR$/Customer/models.py" />
         <option value="$PROJECT_DIR$/Customer/urls.py" />
-        <option value="$PROJECT_DIR$/Client/resources.py" />
+        <option value="$PROJECT_DIR$/paymentBilling/urls.py" />
+        <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/page-error-400.html" />
+        <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/login.html" />
+        <option value="$PROJECT_DIR$/ElaAdmin/urls.py" />
+        <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/page-error-403.html" />
+        <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/common/sidebar.html" />
         <option value="$PROJECT_DIR$/Customer/resources.py" />
+        <option value="$PROJECT_DIR$/Client/models.py" />
+        <option value="$PROJECT_DIR$/Client/resources.py" />
+        <option value="$PROJECT_DIR$/ElaAdmin/views.py" />
+        <option value="$PROJECT_DIR$/ElaAdmin/forms.py" />
+        <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/add_profile.html" />
+        <option value="$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/common/navbar_right.html" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="25" />
     <option name="width" value="1368" />
     <option name="height" value="743" />
@@ -253,6 +245,22 @@
             <path>
               <item name="paymentBilling" type="b2602c69:ProjectViewProjectNode" />
               <item name="paymentBilling" type="462c0819:PsiDirectoryNode" />
+              <item name="ElaAdmin" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="ElaAdmin" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="paymentBilling" type="b2602c69:ProjectViewProjectNode" />
+              <item name="paymentBilling" type="462c0819:PsiDirectoryNode" />
+              <item name="ElaAdmin" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="ElaAdmin" type="462c0819:PsiDirectoryNode" />
+              <item name="includes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="paymentBilling" type="b2602c69:ProjectViewProjectNode" />
+              <item name="paymentBilling" type="462c0819:PsiDirectoryNode" />
               <item name="paymentBilling" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -270,8 +278,10 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\DjangoProject\paymentBilling\paymentBilling\ElaAdmin\templates\ElaAdmin" />
+      <recent name="E:\DjangoProject\paymentBilling\paymentBilling\Customer\templates" />
+      <recent name="E:\DjangoProject\paymentBilling\paymentBilling\Client" />
+      <recent name="E:\DjangoProject\paymentBilling\paymentBilling\Customer\static" />
       <recent name="E:\DjangoProject\paymentBilling\paymentBilling" />
-      <recent name="E:\paymentBilling\ElaAdmin\templates\ElaAdmin" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\paymentBilling\ElaAdmin" />
@@ -357,15 +367,8 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/export.html" />
-    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/OLD/form-validation.html" />
-    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/includes/index.html" />
-    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/includes/Customer/add_success.html" />
-    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/OLD/page-error-400.html" />
-    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/add.html" />
     <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/OLD/uc-toastr.html" />
     <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/addInvoice.html" />
-    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/common/sidebar.html" />
     <entry file="file://$PROJECT_DIR$/Customer/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -389,30 +392,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ElaAdmin/admin.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/common/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" selection-start-line="17" selection-end-line="17" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/common/navbar_right.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="19" column="43" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ElaAdmin/models.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/apps.py">
@@ -471,16 +450,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/paymentBilling/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="22" column="44" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
-          <folding>
-            <element signature="e#638#670#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -496,13 +465,6 @@
         <state relative-caret-position="-187" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ElaAdmin/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="6" column="27" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/customerVerification.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -512,12 +474,6 @@
           <caret line="23" column="37" lean-forward="true" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="60" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/addCustomer.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/page-error-400.html">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/OLD/page-login.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -533,41 +489,136 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/login.html">
+    <entry file="file://$PROJECT_DIR$/Customer/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="15" column="44" lean-forward="true" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/add_profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17">
-          <caret line="11" column="81" lean-forward="true" selection-start-line="11" selection-start-column="81" selection-end-line="11" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ElaAdmin/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="66" column="4" lean-forward="true" selection-start-line="66" selection-start-column="4" selection-end-line="70" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Customer/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1038">
-          <caret line="129" column="5" lean-forward="true" selection-start-line="129" selection-start-column="5" selection-end-line="129" selection-end-column="5" />
+        <state relative-caret-position="170">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ElaAdmin/views.py">
+    <entry file="file://$PROJECT_DIR$/Customer/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="187" column="48" lean-forward="true" selection-start-line="187" selection-start-column="48" selection-end-line="187" selection-end-column="48" />
+        <state relative-caret-position="1038">
+          <caret line="129" column="5" selection-start-line="129" selection-start-column="5" selection-end-line="129" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Customer/static/css/lib/c3/c3.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="133" lean-forward="true" selection-start-column="133" selection-end-column="133" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/static/js/lib/c3/c3.min.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Customer/templates/Customer/add_details.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-33" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/addCustomer.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/paymentBilling/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <element signature="e#638#670#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/common/footer.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/common/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/page-error-400.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="10" lean-forward="true" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/page-error-403.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="103" selection-start-line="10" selection-start-column="103" selection-end-line="10" selection-end-column="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="46" lean-forward="true" selection-start-line="32" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ElaAdmin/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="11" lean-forward="true" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ElaAdmin/models.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/common/sidebar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="13" column="39" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Customer/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-237">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Customer/resources.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="102" column="38" lean-forward="true" selection-start-line="102" selection-start-column="38" selection-end-line="102" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#69#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/resources.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-16">
+          <caret line="8" column="78" selection-start-line="8" selection-start-column="78" selection-end-line="8" selection-end-column="78" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Customer/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
@@ -576,61 +627,57 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="61" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
+        <state relative-caret-position="187">
+          <caret line="24" column="53" lean-forward="true" selection-start-line="24" selection-start-column="53" selection-end-line="24" selection-end-column="60" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Customer/views.py">
+    <entry file="file://$PROJECT_DIR$/ElaAdmin/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        <state relative-caret-position="256">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ElaAdmin/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-34">
+          <caret line="120" column="1" selection-start-line="120" selection-start-column="1" selection-end-line="120" selection-end-column="1" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Customer/urls.py">
+    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/add_profile.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        <state relative-caret-position="392">
+          <caret line="34" column="50" lean-forward="true" selection-start-line="34" selection-start-column="50" selection-end-line="34" selection-end-column="50" />
           <folding>
-            <element signature="e#0#24#0" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Customer/models.py">
+    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-220">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="289">
+          <caret line="17" selection-start-line="17" selection-end-line="17" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Client/resources.py">
+    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/includes/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="31" lean-forward="true" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
+        <state relative-caret-position="-34" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Customer/resources.py">
+    <entry file="file://$PROJECT_DIR$/ElaAdmin/templates/ElaAdmin/common/navbar_right.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="43" column="40" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#69#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="221">
+          <caret line="13" column="161" selection-start-line="13" selection-start-column="161" selection-end-line="13" selection-end-column="161" />
         </state>
       </provider>
     </entry>

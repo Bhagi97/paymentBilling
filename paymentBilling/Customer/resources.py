@@ -64,7 +64,7 @@ class ReceiptResource(ModelResource):
 class UserResource(ModelResource):
     class Meta:
         queryset = User.objects.all()
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['first_name', 'last_name', 'email', 'username']
         allowed_methods = ['get', 'post']
         resource_name = 'user'
 

@@ -25,6 +25,10 @@ class LoginForm(forms.Form):
 
 
 class RegisterProfileForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(RegisterProfileForm, self).__init__(*args, **kwargs)
+        self.fields['client'].initial = 'null'
+
     username = forms.CharField(
         label='USERNAME',
         max_length=50,
@@ -87,3 +91,5 @@ class RegisterProfileForm(forms.Form):
             }
         )
     )
+
+

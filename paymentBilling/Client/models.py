@@ -21,8 +21,8 @@ class Client(models.Model):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    client = models.ForeignKey(Client, related_name='profile', on_delete=models.CASCADE)
+    user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, related_name='client_profile', on_delete=models.CASCADE)
     role = models.CharField(max_length=10)
     phone_no = models.CharField(max_length=10)
 
